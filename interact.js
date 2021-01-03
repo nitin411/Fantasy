@@ -34,3 +34,11 @@ window.onclick = function(event) {
     }
   }
 }
+
+let xhr = new XMLHttpRequest();
+xhr.open('get', 'http://mapps.cricbuzz.com/cbzios/match/30860/scorecard');
+xhr.send();
+
+xhr.onload = function() {
+    console.log(xhr.response);
+};

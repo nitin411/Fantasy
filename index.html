@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css"/>
     <script src="interact.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
    <table class="table">
@@ -210,4 +211,19 @@
      </tbody>
    </table>
 </body>
+
+<script>
+var settings = {
+    "url": "http://mapps.cricbuzz.com/cbzios/match/30860/scorecard",
+    "method": "GET",
+    "timeout": 0,
+    "headers": {
+    "Content-Type": "application/json"
+  },
+  };
+
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+});
+</script>
 </html>
