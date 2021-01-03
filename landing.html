@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css"/>
+    <script src="interact.js"></script>
+</head>
+<body>
+   <table class="table">
+     <thead>        
+     	 <th>Rank</th>
+     	 <th>Team Name</th>
+     	 <th>Player 1</th>
+     	 <th>Points 1</th>
+         <th>Team 1</th>
+     	 <th>Player 2</th>
+         <th>Points 2</th>
+         <th>Team 2</th>
+         <th>TotalPoints</th>
+     </thead>
+     <tbody>
+     	  <tr>
+     	  	  <td data-label="Rank">1</td>
+     	  	  <td data-label="Team Name">Dhakads</td>
+     	  	  <td data-label="Player 1">Paurush</td>
+     	  	  <td data-label="Points 1">1100</td>
+              
+        <!---   <td class = "Team 1">View Team
+                <select>        
+                    <option value="player1">player1</option>
+                    <option value="player2">player2</option>
+                    <option value="player3">player3</option>
+                    <option value="player4">player4</option>
+                    <option value="player5">player5</option>
+                    <option value="player5">player6</option>
+                    <option value="player5">player7</option>
+                    <option value="player5">player8</option>
+                    <option value="player5">player9</option>
+                    <option value="player5">player10</option>
+                    <option value="player5">player11</option>
+                </select>
+                <td ALIGN="center"></td>
+                </td>   --->
+              
+                <td data-lable="Team 1" class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">View Team</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+              <td data-label="Player 2">Anam</td>
+     	  	  <td data-label="Points 2">1200</td>
+              <td data-lable="Team 2" class="dropdown2">
+                  <button onclick="myFunction2()" class="dropbtn2">View Team</button>
+                  <div id="myDropdown2" class="dropdown-content2">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+              <td data-label="Total Points">2300</td>
+     	  </tr>
+
+     	  <tr>
+     	  	  <td data-label="Rank">2</td>
+     	  	  <td data-label="Team Name">Swagglers</td>
+     	  	  <td data-label="Player 1">Rahul</td>
+     	  	  <td data-label="Points 1">1100</td>
+              <td data-lable="Team 1" class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">View Team</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+              <td data-label="Player 2">Vikas</td>
+     	  	  <td data-label="Points 2">1100</td>
+              <td data-lable="Team 2" class="dropdown2">
+                  <button onclick="myFunction2()" class="dropbtn2">View Team</button>
+                  <div id="myDropdown2" class="dropdown-content2">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>  
+              <td data-label="Total Points">2200</td>
+     	  </tr>
+         
+         <tr>
+     	  	  <td data-label="Rank">3</td>
+     	  	  <td data-label="Team Name">Mafias</td>
+     	  	  <td data-label="Player 1">Ujjwal</td>
+     	  	  <td data-label="Points 1">1100</td>
+              <td data-lable="Team 1" class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">View Team</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+             <td data-label="Player 2">Balli</td>
+     	  	  <td data-label="Points 2">1000</td>
+             <td data-lable="Team 2" class="dropdown2">
+                  <button onclick="myFunction2()" class="dropbtn2">View Team</button>
+                  <div id="myDropdown2" class="dropdown-content2">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+             <td data-label="Total Points">2100</td>
+     	  </tr>
+         
+         <tr>
+     	  	  <td data-label="Rank">4</td>
+     	  	  <td data-label="Team Name">Bahubalis</td>
+     	  	  <td data-label="Player 1">Vanshit</td>
+             <td data-label="Points 1">1000</td>
+             <td data-lable="Team 1" class="dropdown">
+                  <button onclick="myFunction()" class="dropbtn">View Team</button>
+                  <div id="myDropdown" class="dropdown-content">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+             <td data-label="Player 2">Tarun</td>
+     	  	  <td data-label="Points 2">1000</td>
+             <td data-lable="Team 2" class="dropdown2">
+                  <button onclick="myFunction2()" class="dropbtn2">View Team</button>
+                  <div id="myDropdown2" class="dropdown-content2">
+                    <a>Player 1</a>
+                    <a>Player 2</a>
+                    <a>Player 3</a>
+                    <a>Player 4</a>
+                    <a>Player 5</a>
+                    <a>Player 6</a>
+                    <a>Player 7</a>
+                    <a>Player 8</a>
+                    <a>Player 9</a>
+                    <a>Player 10</a>
+                    <a>Player 11</a>
+                  </div>
+                </td>
+             <td data-label="Total Points">2000</td>
+     	  </tr>
+         
+     </tbody>
+   </table>
+</body>
+</html>
