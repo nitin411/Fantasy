@@ -1,7 +1,8 @@
 body{
 	margin:0;
 	padding:20px;
-	font-family: sans-serif;
+  font-family: sans-serif;
+  
 }
 
 *{
@@ -13,9 +14,11 @@ body{
 	border-collapse: collapse;
 }
 
+.table {
+  border:1px solid #ddd;
+}
 .table td,.table th{
   padding:12px 15px;
-  border:1px solid #ddd;
   text-align: center;
   font-size:16px;
 }
@@ -157,9 +160,65 @@ body{
     .show {display: block;}
 }
 
+body, html {
+  height: 100%;
+}
 
+/* The hero image */
+.hero-image {
+/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+background-image: linear-gradient(rgb(44, 44, 180), rgba(0, 0, 1, 0.1)), url(assets/ezgif.com-gif-maker.png);
 
+/* Set a specific height */
+height: 50%;
 
+/* Position and center the image to scale nicely on all screens */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+position: relative;
+}
 
+/* Place text in the middle of the image */
+.hero-text {
+text-align: center;
+transform: translate(-50%, -50%);
+color: white;
+}
 
+.innings-text {
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: white;
+}
 
+.image-icon {
+  height: 200px;
+  padding: 50px;
+}
+
+.match-day {
+  color: #A0A0A0;
+  font-size: 12pt;
+}
+
+.match-session {
+  color: #48AA48;
+  font-size: 12pt;
+}
+
+.card-text {
+  font-family: Montserrat;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.banner {
+  background-image: url(assets/banner/Mask\ Group\ 6.png);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

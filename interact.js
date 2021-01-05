@@ -3,8 +3,12 @@ var myTeams = JSON.parse(teams);
 var scores = [];
 
 for(var i=0; i<myTeams.length; i++) {
-  scores.push(scorePerTeam(myTeams[i]));
+  myTeams[i].scores = scorePerTeam(myTeams[i]);
 }
+
+myTeams.sort(function(a, b) {
+  return b.scores.totalScore - a.scores.totalScore;
+});
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
