@@ -9,11 +9,8 @@ def run(*args):
   return subprocess.check_call(['git'] + list(args))
 
 def commit():
-  print("Executing")
   run("add",".")
-  print("Executing")
   run("commit", "-am", "Updated scores")
-  print("Executing")
   run("push")
 
 def  fetch():
