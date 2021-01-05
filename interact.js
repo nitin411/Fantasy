@@ -1,5 +1,6 @@
 var pointsTable = JSON.parse(data);
 var myTeams = JSON.parse(teams);
+var scoreboard = JSON.parse(scoreboard);
 var scores = [];
 
 for(var i=0; i<myTeams.length; i++) {

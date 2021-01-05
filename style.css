@@ -19,12 +19,11 @@ body{
 }
 .table td,.table th{
   padding:12px 15px;
-  text-align: center;
   font-size:16px;
 }
 
 .table th{
-	background-color: darkorange;
+	background-color: #363636;
 	color:#ffffff;
 }
 
@@ -35,16 +34,19 @@ body{
 /*dropdown*/
 
 .dropbtn, .dropbtn2 {
-      background-color: #3498DB;
-      color: white;
+      background-color: none;
+      margin-left: 5px;
+      color: #363636;
       padding: 14px;
       font-size: 14px;
       border: none;
       cursor: pointer;
+      border-radius: 100px;
     }
 
     .dropbtn:hover, .dropbtn:focus, .dropbtn2:hover, .dropbtn2:focus {
-      background-color: #2980B9;
+      background-color: #363636;
+      color: white;
     }
 
     .dropdown, dropdown2 {
@@ -60,6 +62,7 @@ body{
       overflow: scroll;
       box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.12);
       z-index: 1;
+      margin-left: 250px;
     }
 
     .dropdown-content a, .dropdown-content2 a {
@@ -75,6 +78,33 @@ body{
 
     .show {display: block;}
 
+    .table tbody tr td:first-child{
+      background-color: #e8e8e8;
+    }
+
+    .table tbody tr:nth-child(2) td:first-child {
+      background: linear-gradient(#FFC85F 0%, #F7A829 100%);
+    }
+  
+    .table tbody tr:nth-child(3) td:first-child{
+      background: linear-gradient(#D6D6D6 0%, #9D9D9D 100%);
+    }
+  
+    .table tbody tr:nth-child(4) td:first-child {
+      background: linear-gradient(#E2A857 0%, #C4761C 100%);
+    }
+
+    .hidden-card {
+      display: none;
+    }
+
+    .banner {
+      background-image: url(assets/banner/Mask\ Group\ 6.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
 /*responsive*/
 
 @media(max-width: 500px){
@@ -82,18 +112,39 @@ body{
 		display: none;
 	}
 
+  .banner {
+    background-image: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .table tbody tr td:first-child {
+    background-color: #e8e8e8;
+  }
+
+  .table tbody tr:nth-child(2) td:first-child {
+    background: linear-gradient(#FFC85F 0%, #F7A829 100%);
+  }
+
+  .table tbody tr:nth-child(3) td:first-child {
+    background: linear-gradient(#D6D6D6 0%, #9D9D9D 100%);
+  }
+
+  .table tbody tr:nth-child(4) td:first-child {
+    background: linear-gradient(#E2A857 0%, #C4761C 100%);
+  }
+
 	.table, .table tbody, .table tr, .table td{
 		display: block;
 		width: 100%;
 	}
 	.table tr{
-		margin-bottom:15px;
+    margin-bottom:15px;
+    border-radius: 10px;
 	}
-    
-     .table td:first-child{
-		background: darkorange;
-        color: #fff;
-	}
+  
     
     .table td:last-child{
 		background: black;
@@ -106,7 +157,15 @@ body{
 		text-align: right;
 		position: relative;
 	}
-    
+
+  .table tr td:nth-child(3)::before{
+		padding-top:9px;
+  }  
+
+  .table tr td:nth-child(4)::before{
+		padding-top:9px;
+  }  
+  
 	.table td::before{
 		content: attr(data-label);
 		position: absolute;
@@ -121,17 +180,12 @@ body{
 /*dropdown for responsive*/  
     
     .dropbtn, .dropbtn2 {
-      background-color: #3498DB;
-      color: white;
       padding: 14px;
       font-size: 14px;
       border: none;
       cursor: pointer;
     }
 
-    .dropbtn:hover, .dropbtn:focus, .dropbtn2:hover, .dropbtn2:focus {
-      background-color: #2980B9;
-    }
 
     .dropdown, dropdown2 {
       position: relative;
@@ -158,6 +212,26 @@ body{
     .dropdown a:hover, .dropdown2 a:hover {background-color: #ddd;}
 
     .show {display: block;}
+
+    .hidden-card {
+      display: block;
+      width: 100%;
+      height: auto;
+      /* background: url("assets/banner/Mask\ Group\ 5\ \(1\)/Mask\ Group\ 5@3x.png"); */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+      padding: 0px;
+    }
+
+    .hidden-card img {
+      max-width: 100%;
+    }
+
+    .card-body2 {
+      padding: 0px;
+    }
 }
 
 body, html {
@@ -179,18 +253,6 @@ background-size: cover;
 position: relative;
 }
 
-/* Place text in the middle of the image */
-.hero-text {
-text-align: center;
-transform: translate(-50%, -50%);
-color: white;
-}
-
-.innings-text {
-  text-align: center;
-  transform: translate(-50%, -50%);
-  color: white;
-}
 
 .image-icon {
   height: 200px;
@@ -207,18 +269,23 @@ color: white;
   font-size: 12pt;
 }
 
-.card-text {
-  font-family: Montserrat;
+body {
+  font-family: Poppins !important;
 }
 
+p {
+  font-size: 14px !important;
+}
+
+.card {
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
 .padding-10 {
   padding: 10px;
 }
 
-.banner {
-  background-image: url(assets/banner/Mask\ Group\ 6.png);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+b {
+  font-weight: 900 !important;
 }
+
