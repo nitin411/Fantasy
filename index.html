@@ -51,11 +51,6 @@
               document.write('<p class="float-left match-day">'+scoreboard.match+'rd Test Match, '+scoreboard.location+'</p>')
             </script>
           </div>
-          <div class="col-6">
-            <script>
-              document.write('<p class="float-right match-session">Day '+scoreboard.day+', Session '+scoreboard.session+'</p>')
-            </script>
-          </div>
         </div>
             <script>
               var cardBody = document.getElementById("card-body");
@@ -93,7 +88,7 @@
         <div class="row padding-10">
           <div class="col-12">
             <script>
-              document.write('<span>'+scoreboard.result+'</span>')
+              document.write('<span class="float-left match-day"> Last updated over: '+scoreboard.overs+'</span>')
             </script>
           </div>
         </div>
@@ -107,7 +102,7 @@
      	 <th>Team Name</th>
      	 <th>Player 1</th>
      	 <th>Player 2</th>
-         <th>TotalPoints</th>
+       <th>TotalPoints</th>
      </thead>
      <tbody>
        
