@@ -2,8 +2,7 @@ import requests
 import json
 import subprocess
 
-points = {}
-
+points = {"Rahane": 0, "Ashwin": 0, "Bumrah": 0, "Jadeja": 0, "Pujara": 0, "Sharma": 0, "Labuschagne": 0, "Smith": 0, "Warner": 0, "Agarwal": 0, "Yadav": 0, "Pant": 0, "Rahul": 0, "Cummins": 0, "Green": 0, "Hazlewood": 0, "Head": 0, "Lyon": 0, "Pattinson": 0, "Starc": 0, "Siraj": 0, "Natarajan": 0, "Saha": 0, "Saini": 0, "Shaw": 0, "Gill": 0, "Thakur": 0, "Vihari": 0, "Paine": 0, "Henriques": 0, "Neser": 0, "Pucovski": 0, "Swepson": 0, "Wade": 0, "Abbott": 0}
 
 def run(*args):
   return subprocess.check_call(['git'] + list(args))
@@ -14,7 +13,7 @@ def commit():
   run("push")
 
 def  fetch():
-  url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2679&matchid=48825"
+  url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2717&matchid=49624"
   payload = {}
   headers = {
     'x-rapidapi-key': 'dd8d46530cmsh63fc0c06dd092f1p1ca8a6jsn143ccf9a171f',
@@ -69,7 +68,20 @@ if __name__ == "__main__":
   innings = data['fullScorecard']['innings']
   points = {}
   how_out = []
+  scores = {}
   for inning in innings:
+
+    team = inning['team']['shortName']
+    if team in scores: 
+      if(inning['isDeclared']=="true"):
+        scores[team]+=" and " + inning['run'] + "/" + inning['wicket'] + " dec."
+      else:
+        scores[team]+=" and " + inning['run'] + "/" + inning['wicket']
+    else:
+      if(inning['isDeclared']=="true"):
+        scores[team]=inning['run'] + "/" + inning['wicket'] + " dec."
+      else:
+        scores[team]=inning['run'] + "/" + inning['wicket']
     for batsman in inning['batsmen']:
       player = batsman['name'].split(" ")[-1]
       score = calc_batsman_score(batsman)
@@ -85,9 +97,30 @@ if __name__ == "__main__":
 
   parse_how_out(how_out)
   points = json.dumps(points)
-
   with open("points.json", "w") as file1:
     file1.write("data = '")
     file1.write(points)
     file1.write("'")
-  ##commit()
+  
+  team1=""
+  team2=""
+  team1Score=""
+  team2Score=""
+  j=0
+  for i in scores: 
+    if (j == 0): 
+      team1 = i
+      team1Score = scores[i]
+    else:
+      team2 = i
+      team2Score = scores[i]      
+    j = j + 1
+
+  with open("scoreboard.json", "w") as file:
+    file.write("scoreboard = '")
+    file.write("{\"match\": 3,")
+    file.write("\"location\":\"Sydney\",")
+    file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
+    file.write("{\"batting\": \"" + team2 + "\"," + "\"score\": \"" + team2Score + "\"}],")
+    file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
+    commit()
