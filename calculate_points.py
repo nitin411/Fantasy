@@ -7,6 +7,7 @@ def run(*args):
 
 def commit():
   try:
+    run("pull")
     run("add",".")
     run("commit", "-am", "Updated scores")
     run("push")
