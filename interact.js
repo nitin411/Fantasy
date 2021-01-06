@@ -39,8 +39,12 @@ window.onclick = function(event) {
 function scorePerTeam(team) {
   var players1 = team.team1;
   var players2 = team.team2;
+  var players3 = team.team3;
+  var players4 = team.team4;
   var score1 = 0;
   var score2 = 0;
+  var score3 = 0;
+  var score4 = 0;
 
   for(var i=0; i < players1.length; i++ ) {
     score1 += pointsTable[players1[i]]
@@ -50,13 +54,29 @@ function scorePerTeam(team) {
     score2 += pointsTable[players2[i]]
   }
 
+  if (players3){
+    for(var i=0; i < players3.length; i++ ) {
+      score3 += pointsTable[players2[i]]
+    }
+    score3 += pointsTable[team.team3Captain]
+    score3 += 0.5*pointsTable[team.team3ViceCaptain]
+  }
+
+  if (players4){
+    for(var i=0; i < players4.length; i++ ) {
+      score4 += pointsTable[players2[i]]
+    }
+    score4 += pointsTable[team.team4Captain]
+    score4 += 0.5*pointsTable[team.team4ViceCaptain]
+  }
+
   score1 += pointsTable[team.team1Captain]
   score2 += pointsTable[team.team2Captain]
   score1 += 0.5*pointsTable[team.team1ViceCaptain]
   score2 += 0.5*pointsTable[team.team2ViceCaptain]
-  var totalScore = score1+score2;
+  var totalScore = score1+score2+score3+score4;
 
-  return {score1, score2, totalScore};
+  return {score1, score2, score3, score4, totalScore};
 
 }
 

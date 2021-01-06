@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fantasy league</title>
+    <script type="text/javascript" src="points.json"></script>
+    <script type="text/javascript" src="data_files/teams/4v4_2.json"></script>
+    <script type="text/javascript" src="scoreboard.json"></script>
+    <link rel="icon" type="image/png" href="trophy.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- <link href="/assets/css/material-kit.css?v=2.0.4" rel="stylesheet" /> -->
+    <script src="interact.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css"/>
+
+    <script type="text/javascript">
+      setTimeout(function () { 
+        location.reload();
+      }, 60 * 1000);
+  </script>
+  
+</head>
+<body>
+
+  <div class="banner">
+    <div class="card col-12 col-md-4 offset-md-4 hidden-card">
+      <div class="card-body card-body2">
+          <img src="assets/banner/Mask Group 5 (1)/Mask Group 5@3x.png">
+        </div>
+    </div>
+  <div class="card col-12 col-md-4 offset-md-4">
+    <div class="card-body">
+      <div class="card-text" id="card-body">
+        <div class="row padding-10">
+          <div class="col-6">
+            <script>
+              document.write('<p class="float-left match-day">'+scoreboard.match+'rd Test Match, '+scoreboard.location+'</p>')
+            </script>
+          </div>
+          <div class="col-6">
+            <script>
+              document.write('<p class="float-right match-session">Day '+scoreboard.day+', Session '+scoreboard.session+'</p>')
+            </script>
+          </div>
+        </div>
+            <script>
+              var cardBody = document.getElementById("card-body");
+              for (var a = 0; a < scoreboard.scoreBreakUp.length; a++) {
+                var containerDiv = document.createElement("div");
+                containerDiv.classList=["row padding-10"];
+
+                var containerColLeft = document.createElement("div");
+                containerColLeft.className = "col-6";
+
+                var image = document.createElement("img");
+                image.src="assets/"+scoreboard.scoreBreakUp[a].batting+"_flag.png";
+                image.className="float-left";
+                containerColLeft.appendChild(image);
+
+                var teamName = document.createElement("span");
+                teamName.className = "padding-10";
+                teamName.appendChild(document.createTextNode(scoreboard.scoreBreakUp[a].batting));
+                containerColLeft.appendChild(teamName);
+
+                var containerColRight = document.createElement("div");
+                containerColRight.className = "col-6";
+
+                var score = document.createElement("span");
+                score.className = "float-right";
+                score.appendChild(document.createTextNode(scoreboard.scoreBreakUp[a].score));
+                containerColRight.appendChild(score);
+                
+                containerDiv.appendChild(containerColLeft);
+                containerDiv.appendChild(containerColRight);
+
+                cardBody.appendChild(containerDiv);
+              }
+            </script>   
+        <div class="row padding-10">
+          <div class="col-12">
+            <script>
+              document.write('<span>'+scoreboard.result+'</span>')
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   <table class="table">
+     <thead>
+     	 <th>Rank</th>
+     	 <th>Team Name</th>
+     	 <th>Player 1</th>
+          <th>Player 2</th>
+          <th>Player 3</th>
+     	    <th>Player 4</th>
+         <th>TotalPoints</th>
+     </thead>
+     <tbody>
+       
+      <script language="javascript" type="text/javascript">
+
+          var body = document.getElementsByTagName('tbody')[0];
+          for (var a = 0; a < myTeams.length; a++) {
+            var teamName = myTeams[a].teamName;
+            var tr = document.createElement('tr');
+
+            var td1 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Rank";
+            td1.setAttributeNode(attDataLabel);
+            td1.appendChild(document.createTextNode(a+1));
+            tr.appendChild(td1);
+
+            var td2 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Team Name";
+            td2.setAttributeNode(attDataLabel);
+            td2.appendChild(document.createTextNode(myTeams[a].teamName));
+            tr.appendChild(td2);
+
+            var td3 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Player 1";
+            td3.setAttributeNode(attDataLabel);
+            td3.appendChild(document.createTextNode(myTeams[a].player1));
+            var boldSpan = document.createElement("b");
+            boldSpan.appendChild(document.createTextNode(" (" + myTeams[a].scores.score1 + ")"));
+            td3.appendChild(boldSpan);
+            tr.appendChild(td3);
+
+            var button1 = document.createElement('i');
+            var dropdownDiv = document.createElement("div");
+            button1.className = "dropbtn fa fa-eye " + a;
+            dropdownDiv.id = "myDropdown" + a + "0";
+            dropdownDiv.className = "dropdown-content"
+            var attDataLabel2 = document.createAttribute("aria-hidden");
+            attDataLabel2.value = "true";
+            button1.setAttributeNode(attDataLabel2);
+            td3.appendChild(button1);
+            button1.onclick = function(a){
+              var index = a.target.classList[3];
+              document.getElementById("myDropdown"+index+"0").classList.toggle("show");
+            };
+            td3.appendChild(dropdownDiv);
+            for (var j=0; j<myTeams[a].team1.length; j++) {
+              var textLink = document.createElement("a");
+              var isCaptian = (myTeams[a].team1Captain === myTeams[a].team1[j]);
+              var isViceCaptian = (myTeams[a].team1ViceCaptain === myTeams[a].team1[j]);
+              var text = myTeams[a].team1[j];
+              var points = pointsTable[myTeams[a].team1[j]];
+              
+              var boldText;
+              if(isCaptian) {
+                boldText = "(C) " + text;
+                text = " - " + (points*2) + " pts."
+              } else if(isViceCaptian) {
+                boldText = "(VC) " + text;
+                text = " - " + (points*1.5) + " pts."
+              } else {
+                boldText = text;
+                text = " - " + points + " pts.";
+              }
+              
+              if (boldText) {
+                var boldSpan = document.createElement("b");
+                boldSpan.appendChild(document.createTextNode(boldText));
+                textLink.appendChild(boldSpan);
+              }
+              textLink.appendChild(document.createTextNode(text));
+              dropdownDiv.appendChild(textLink);
+            }
+            
+
+            var td6 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Player 2";
+            td6.setAttributeNode(attDataLabel);
+            td6.appendChild(document.createTextNode(myTeams[a].player2));
+            var boldSpan2 = document.createElement("b");
+            boldSpan2.appendChild(document.createTextNode(" (" + myTeams[a].scores.score2 + ")"));
+            td6.appendChild(boldSpan2);
+            tr.appendChild(td6);
+
+            var button2 = document.createElement('i');
+            var dropdownDiv2 = document.createElement("div");
+            button2.className = "dropbtn fa fa-eye " + a;
+            dropdownDiv2.id = "myDropdown" + a + "1";
+            dropdownDiv2.className = "dropdown-content"
+            td6.appendChild(button2);
+            button2.onclick = function(a){
+              var index = a.target.classList[3];
+              document.getElementById("myDropdown"+index+"1").classList.toggle("show");
+            };
+            td6.appendChild(dropdownDiv2);
+            for (var k=0; k<myTeams[a].team2.length; k++) {
+              var textLink2 = document.createElement("a");
+              var isCaptian = (myTeams[a].team2Captain === myTeams[a].team2[k]);
+              var isViceCaptian = (myTeams[a].team2ViceCaptain === myTeams[a].team2[k]);
+              var points = pointsTable[myTeams[a].team2[k]];
+              var text2 = myTeams[a].team2[k];
+
+              var boldText2;
+              if(isCaptian) {
+                boldText2 = "(C) " + text2;
+                text2 = " - " + (points*2) + " pts."
+              } else if(isViceCaptian) {
+                boldText2 = "(VC) " + text2;
+                text2 = " - " + (points*1.5) + " pts."
+              } else {
+                boldText2 = text2;
+                text2 = " - " + points + " pts.";
+              }
+              
+              
+              if (boldText2) {
+                var boldSpan2 = document.createElement("b");
+                boldSpan2.appendChild(document.createTextNode(boldText2));
+                textLink2.appendChild(boldSpan2);
+              }
+
+              textLink2.appendChild(document.createTextNode(text2));
+              dropdownDiv2.appendChild(textLink2);
+            }
+            
+            var td7 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Player 3";
+            td7.setAttributeNode(attDataLabel);
+            td7.appendChild(document.createTextNode(myTeams[a].player3));
+            var boldSpan3 = document.createElement("b");
+            boldSpan3.appendChild(document.createTextNode(" (" + myTeams[a].scores.score3 + ")"));
+            td7.appendChild(boldSpan3);
+            tr.appendChild(td7);
+
+            var button3 = document.createElement('i');
+            var dropdownDiv3 = document.createElement("div");
+            button3.className = "dropbtn fa fa-eye " + a;
+            dropdownDiv3.id = "myDropdown" + a + "2";
+            dropdownDiv3.className = "dropdown-content"
+            td7.appendChild(button3);
+            button3.onclick = function(a){
+              var index = a.target.classList[3];
+              document.getElementById("myDropdown"+index+"2").classList.toggle("show");
+            };
+            td7.appendChild(dropdownDiv3);
+            for (var k=0; k<myTeams[a].team3.length; k++) {
+              var textLink3 = document.createElement("a");
+              var isCaptian = (myTeams[a].team3Captain === myTeams[a].team3[k]);
+              var isViceCaptian = (myTeams[a].team3ViceCaptain === myTeams[a].team3[k]);
+              var points = pointsTable[myTeams[a].team3[k]];
+              var text3 = myTeams[a].team3[k];
+
+              var boldText3;
+              if(isCaptian) {
+                boldText3 = "(C) " + text3;
+                text3 = " - " + (points*2) + " pts."
+              } else if(isViceCaptian) {
+                boldText3 = "(VC) " + text3;
+                text3 = " - " + (points*1.5) + " pts."
+              } else {
+                boldText3 = text3;
+                text3 = " - " + points + " pts.";
+              }
+              
+              
+              if (boldText3) {
+                var boldSpan3x = document.createElement("b");
+                boldSpan3x.appendChild(document.createTextNode(boldText3));
+                textLink3.appendChild(boldSpan3x);
+              }
+
+              textLink3.appendChild(document.createTextNode(text3));
+              dropdownDiv3.appendChild(textLink3);
+            }
+
+            var td8 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Player 4";
+            td8.setAttributeNode(attDataLabel);
+            td8.appendChild(document.createTextNode(myTeams[a].player4));
+            var boldSpan4 = document.createElement("b");
+            boldSpan4.appendChild(document.createTextNode(" (" + myTeams[a].scores.score4 + ")"));
+            td8.appendChild(boldSpan4);
+            tr.appendChild(td8);
+
+            var button4 = document.createElement('i');
+            var dropdownDiv4 = document.createElement("div");
+            button4.className = "dropbtn fa fa-eye " + a;
+            dropdownDiv4.id = "myDropdown" + a + "3";
+            dropdownDiv4.className = "dropdown-content"
+            td8.appendChild(button4);
+            button4.onclick = function(a){
+              var index = a.target.classList[3];
+              document.getElementById("myDropdown"+index+"3").classList.toggle("show");
+            };
+            td8.appendChild(dropdownDiv4);
+            for (var k=0; k<myTeams[a].team4.length; k++) {
+              var textLink4 = document.createElement("a");
+              var isCaptian = (myTeams[a].team4Captain === myTeams[a].team4[k]);
+              var isViceCaptian = (myTeams[a].team4ViceCaptain === myTeams[a].team4[k]);
+              var points = pointsTable[myTeams[a].team4[k]];
+              var text4 = myTeams[a].team4[k];
+
+              var boldText4;
+              if(isCaptian) {
+                boldText4 = "(C) " + text4;
+                text4 = " - " + (points*2) + " pts."
+              } else if(isViceCaptian) {
+                boldText4 = "(VC) " + text4;
+                text4 = " - " + (points*1.5) + " pts."
+              } else {
+                boldText4 = text4;
+                text4 = " - " + points + " pts.";
+              }
+              
+              
+              if (boldText4) {
+                var boldSpan4 = document.createElement("b");
+                boldSpan4.appendChild(document.createTextNode(boldText4));
+                textLink4.appendChild(boldSpan4);
+              }
+
+              textLink4.appendChild(document.createTextNode(text4));
+              dropdownDiv4.appendChild(textLink4);
+            }
+
+            var td9 = document.createElement('td');
+            var attDataLabel = document.createAttribute("data-label");
+            attDataLabel.value = "Total Score";
+            td9.setAttributeNode(attDataLabel);
+            var boldSpan2 = document.createElement("b");
+            boldSpan2.appendChild(document.createTextNode(myTeams[a].scores.totalScore));
+            td9.appendChild(boldSpan2);
+            tr.appendChild(td9);
+            
+            body.appendChild(tr);
+          }
+
+        </script>
+     </tbody>
+   </table>
+</body>
+</html>
