@@ -87,5 +87,7 @@ if __name__ == "__main__":
   points = json.dumps(points)
 
   with open("points.json", "w") as file1:
+    file1.write("data = '")
     file1.write(points)
-  commit()
+    file1.write("'")
+  ##commit()
