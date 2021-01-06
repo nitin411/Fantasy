@@ -8,10 +8,12 @@ def run(*args):
   return subprocess.check_call(['git'] + list(args))
 
 def commit():
-  run("add",".")
-  run("commit", "-am", "Updated scores")
-  run("push")
-
+  try:
+    run("add",".")
+    run("commit", "-am", "Updated scores")
+    run("push")
+  except Exception as e:
+    print("Exception")
 def  fetch():
   url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2717&matchid=49624"
   payload = {}
