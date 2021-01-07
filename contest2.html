@@ -163,14 +163,17 @@
               document.getElementById("myDropdown"+index+"0").classList.toggle("show");
             };
             td3.appendChild(dropdownDiv);
+            var subbed = false;
             for (var j=0; j<myTeams[a].team1.length; j++) {
               var textLink = document.createElement("a");
               var isCaptian = (myTeams[a].team1Captain === myTeams[a].team1[j]);
               var isViceCaptian = (myTeams[a].team1ViceCaptain === myTeams[a].team1[j]);
               var text = myTeams[a].team1[j];
               var points = pointsTable[myTeams[a].team1[j]];
-              
+              var isPlayerSubOut = myTeams[a].substitutes && (myTeams[a].substitutes.sub1Out === myTeams[a].team1[j]);
+              var subOutScore;
               var boldText;
+
               if(isCaptian) {
                 boldText = "(C) " + text;
                 text = " - " + (points*2) + " pts."
@@ -178,10 +181,18 @@
                 boldText = "(VC) " + text;
                 text = " - " + (points*1.5) + " pts."
               } else {
-                boldText = text;
-                text = " - " + points + " pts.";
+                boldText = ""+text;
+                if (isPlayerSubOut){
+                  subbed = true;
+                  var outIcon = document.createElement("img");
+                  outIcon.src = "assets/banner/Out.svg";
+                  textLink.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub1Day + " "));
+                  textLink.appendChild(outIcon);
+                  textLink.appendChild(document.createTextNode(") "));
+
+                }
+                text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
               }
-              
               if (boldText) {
                 var boldSpan = document.createElement("b");
                 boldSpan.appendChild(document.createTextNode(boldText));
@@ -189,6 +200,26 @@
               }
               textLink.appendChild(document.createTextNode(text));
               dropdownDiv.appendChild(textLink);
+            }
+            if (subbed) {
+                var text = myTeams[a].substitutes.sub1In;
+                var points = pointsTable[text];
+                var boldText = text;
+
+                var inIcon = document.createElement("img");
+                inIcon.src = "assets/banner/In.svg";
+
+
+                text = " - " + (subbed? myTeams[a].scores.sub1InScore + "/":"") + points + " pts.";
+                var textLink = document.createElement("a");
+                var boldSpan = document.createElement("b");
+                textLink.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub1Day + " "));
+                textLink.appendChild(inIcon);
+                textLink.appendChild(document.createTextNode(") "));
+                boldSpan.appendChild(document.createTextNode(boldText));
+                textLink.appendChild(boldSpan);
+                textLink.appendChild(document.createTextNode(text));
+                dropdownDiv.appendChild(textLink);
             }
             
 
@@ -213,11 +244,15 @@
               document.getElementById("myDropdown"+index+"1").classList.toggle("show");
             };
             td6.appendChild(dropdownDiv2);
-            for (var k=0; k<myTeams[a].team2.length; k++) {
+
+            var subbed = false;
+            for (var k=0; k<myTeams[a].team1.length; k++) {
               var textLink2 = document.createElement("a");
               var isCaptian = (myTeams[a].team2Captain === myTeams[a].team2[k]);
               var isViceCaptian = (myTeams[a].team2ViceCaptain === myTeams[a].team2[k]);
               var points = pointsTable[myTeams[a].team2[k]];
+              var isPlayerSubOut = myTeams[a].substitutes && (myTeams[a].substitutes.sub2Out === myTeams[a].team2[k]);
+              var subOutScore;
               var text2 = myTeams[a].team2[k];
 
               var boldText2;
@@ -228,9 +263,21 @@
                 boldText2 = "(VC) " + text2;
                 text2 = " - " + (points*1.5) + " pts."
               } else {
-                boldText2 = text2;
+                boldText2 = ""+ text2;
                 text2 = " - " + points + " pts.";
               }
+              
+              if (isPlayerSubOut){
+                  subbed = true;
+                  var outIcon = document.createElement("img");
+                  outIcon.src = "assets/banner/Out.svg";
+
+                  textLink2.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub2Day + " "));
+                  textLink2.appendChild(outIcon);
+                  textLink2.appendChild(document.createTextNode(") "));
+
+                }
+                text2 = " - " + (isPlayerSubOut? myTeams[a].scores.sub2OutScore + "/":"") + points + " pts.";
               
               
               if (boldText2) {
@@ -241,6 +288,27 @@
 
               textLink2.appendChild(document.createTextNode(text2));
               dropdownDiv2.appendChild(textLink2);
+            }
+
+            if (subbed) {
+                var text = myTeams[a].substitutes.sub2In;
+                var points = pointsTable[text];
+                var boldText2 = text;
+
+                var inIcon = document.createElement("img");
+                inIcon.src = "assets/banner/In.svg";
+
+
+                text = " - " + (subbed? myTeams[a].scores.sub2InScore + "/":"") + points + " pts.";
+                var textLink2 = document.createElement("a");
+                var boldSpan2 = document.createElement("b");
+                textLink2.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub2Day + " "));
+                textLink2.appendChild(inIcon);
+                textLink2.appendChild(document.createTextNode(") "));
+                boldSpan2.appendChild(document.createTextNode(boldText));
+                textLink2.appendChild(boldSpan);
+                textLink2.appendChild(document.createTextNode(text));
+                dropdownDiv2.appendChild(textLink2);
             }
             
             var td7 = document.createElement('td');
@@ -270,6 +338,8 @@
               var isViceCaptian = (myTeams[a].team3ViceCaptain === myTeams[a].team3[k]);
               var points = pointsTable[myTeams[a].team3[k]];
               var text3 = myTeams[a].team3[k];
+              var isPlayerSubOut = myTeams[a].substitutes && (myTeams[a].substitutes.sub3Out === myTeams[a].team3[k]);
+              
 
               var boldText3;
               if(isCaptian) {
@@ -279,9 +349,22 @@
                 boldText3 = "(VC) " + text3;
                 text3 = " - " + (points*1.5) + " pts."
               } else {
-                boldText3 = text3;
+                boldText3 = ""+ text3;
                 text3 = " - " + points + " pts.";
               }
+
+              if (isPlayerSubOut){
+                  subbed = true;
+                  var outIcon = document.createElement("img");
+                  outIcon.src = "assets/banner/Out.svg";
+
+                  textLink3.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub3Day + " "));
+                  textLink3.appendChild(outIcon);
+                  textLink3.appendChild(document.createTextNode(") "));
+
+                }
+                text3 = " - " + (isPlayerSubOut? myTeams[a].scores.sub3OutScore + "/":"") + points + " pts.";
+              
               
               
               if (boldText3) {
@@ -292,6 +375,27 @@
 
               textLink3.appendChild(document.createTextNode(text3));
               dropdownDiv3.appendChild(textLink3);
+            }
+
+            if (subbed) {
+                var text = myTeams[a].substitutes.sub3In;
+                var points = pointsTable[text];
+                var boldText3 = ""+ text;
+
+                var inIcon = document.createElement("img");
+                inIcon.src = "assets/banner/In.svg";
+
+                console.log(myTeams[a].scores)
+                text = " - " + (subbed? myTeams[a].scores.sub3InScore + "/":"") + points + " pts.";
+                var textLink3 = document.createElement("a");
+                var boldSpan = document.createElement("b");
+                textLink3.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub3Day + " "));
+                textLink3.appendChild(inIcon);
+                textLink3.appendChild(document.createTextNode(") "));
+                boldSpan.appendChild(document.createTextNode(boldText3));
+                textLink3.appendChild(boldSpan);
+                textLink3.appendChild(document.createTextNode(text));
+                dropdownDiv3.appendChild(textLink3);
             }
 
             var td8 = document.createElement('td');
@@ -315,12 +419,15 @@
               document.getElementById("myDropdown"+index+"3").classList.toggle("show");
             };
             td8.appendChild(dropdownDiv4);
+            var subbed = false;
             for (var k=0; k<myTeams[a].team4.length; k++) {
               var textLink4 = document.createElement("a");
               var isCaptian = (myTeams[a].team4Captain === myTeams[a].team4[k]);
               var isViceCaptian = (myTeams[a].team4ViceCaptain === myTeams[a].team4[k]);
               var points = pointsTable[myTeams[a].team4[k]];
               var text4 = myTeams[a].team4[k];
+              var isPlayerSubOut = myTeams[a].substitutes && (myTeams[a].substitutes.sub4Out === myTeams[a].team4[k]);
+ 
 
               var boldText4;
               if(isCaptian) {
@@ -334,7 +441,18 @@
                 text4 = " - " + points + " pts.";
               }
               
-              
+              if (isPlayerSubOut){
+                  subbed = true;
+                  var outIcon = document.createElement("img");
+                  outIcon.src = "assets/banner/Out.svg";
+
+                  textLink4.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub4Day + " "));
+                  textLink4.appendChild(outIcon);
+                  textLink4.appendChild(document.createTextNode(") "));
+
+                }
+                text4 = " - " + (isPlayerSubOut? myTeams[a].scores.sub4OutScore + "/":"") + points + " pts.";
+
               if (boldText4) {
                 var boldSpan4 = document.createElement("b");
                 boldSpan4.appendChild(document.createTextNode(boldText4));
@@ -343,6 +461,27 @@
 
               textLink4.appendChild(document.createTextNode(text4));
               dropdownDiv4.appendChild(textLink4);
+            }
+
+            if (subbed) {
+                var text = myTeams[a].substitutes.sub4In;
+                var points = pointsTable[text];
+                var boldText3 = text;
+
+                var inIcon = document.createElement("img");
+                inIcon.src = "assets/banner/In.svg";
+
+
+                text4 = " - " + (subbed? myTeams[a].scores.sub4InScore + "/":"") + points + " pts.";
+                var textLink4 = document.createElement("a");
+                var boldSpan = document.createElement("b");
+                textLink4.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub3Day + " "));
+                textLink4.appendChild(inIcon);
+                textLink4.appendChild(document.createTextNode(") "));
+                boldSpan.appendChild(document.createTextNode(boldText));
+                textLink4.appendChild(boldSpan);
+                textLink4.appendChild(document.createTextNode(text4));
+                dropdownDiv4.appendChild(textLink4);
             }
 
             var td9 = document.createElement('td');

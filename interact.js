@@ -58,7 +58,6 @@ function getSnapshotFromDay(day) {
 function handleSubstitution(team, subDay, subIn, subOut, captain, viceCaptain, score, pointsTable) {
   var multiplier = 1;
   var snapshot = getSnapshotFromDay(subDay)
-  console.log(team);
   if (team.includes(subOut)) {
     if (subOut === captain) {
       multiplier = 2;
@@ -66,11 +65,14 @@ function handleSubstitution(team, subDay, subIn, subOut, captain, viceCaptain, s
       multiplier = 1.5;
     }
 
-    var scoreToRemove = snapshot[subOut]*multiplier;
-    var scoreToAdd = (pointsTable[subIn] - snapshot[subIn])*multiplier;
-    return score + scoreToAdd - scoreToRemove;
+    var oldPlayerTotalScore = pointsTable[subOut]*multiplier;
+    var oldPlayerScoreToAdd = snapshot[subOut]*multiplier;
+    var newPlayerScoreToAdd = (pointsTable[subIn] - snapshot[subIn])*multiplier;
+    score = score + newPlayerScoreToAdd + oldPlayerScoreToAdd - oldPlayerTotalScore;
+    
+    return {score, oldPlayerScoreToAdd, newPlayerScoreToAdd};
   }
-  return score;
+  return { score, oldPlayerScoreToAdd, newPlayerScoreToAdd };
 }
 
 function scorePerTeam(team) {
@@ -83,6 +85,14 @@ function scorePerTeam(team) {
   var score3 = 0;
   var score4 = 0;
   var substitute = team.substitutes;
+  var sub1InScore = 0;
+  var sub1OutScore = 0;
+  var sub2InScore = 0;
+  var sub2OutScore = 0;
+  var sub3InScore = 0;
+  var sub3OutScore = 0;
+  var sub4InScore = 0;
+  var sub4OutScore = 0;
 
   for(var i=0; i < players1.length; i++ ) {
     score1 += pointsTable[players1[i]]
@@ -90,8 +100,12 @@ function scorePerTeam(team) {
   score1 += pointsTable[team.team1Captain]
   score1 += 0.5*pointsTable[team.team1ViceCaptain]
   if (substitute && substitute.sub1Day !== "") {
-    score1 = handleSubstitution(players1, substitute.sub1Day, substitute.sub1In, substitute.sub1Out, 
+    var subLogic = handleSubstitution(players1, substitute.sub1Day, substitute.sub1In, substitute.sub1Out, 
       team.team1Captain, team.team1ViceCaptain, score1, pointsTable);
+
+    score1 = subLogic.score
+    sub1OutScore = subLogic.oldPlayerScoreToAdd
+    sub1InScore = subLogic.newPlayerScoreToAdd
   }
 
   for(var i=0; i < players2.length; i++ ) {
@@ -100,8 +114,12 @@ function scorePerTeam(team) {
   score2 += pointsTable[team.team2Captain]
   score2 += 0.5*pointsTable[team.team2ViceCaptain]
   if (substitute && substitute.sub2Day !== "") {
-    score2 = handleSubstitution(players2, substitute.sub2Day, substitute.sub2In, substitute.sub2Out, 
+    var subLogic = handleSubstitution(players2, substitute.sub2Day, substitute.sub2In, substitute.sub2Out, 
       team.team2Captain, team.team2ViceCaptain, score2, pointsTable);
+      console.log(subLogic);
+      score2 = subLogic.score
+      sub2OutScore = subLogic.oldPlayerScoreToAdd
+      sub2InScore = subLogic.newPlayerScoreToAdd
   }
 
   if (players3){
@@ -111,8 +129,12 @@ function scorePerTeam(team) {
     score3 += pointsTable[team.team3Captain]
     score3 += 0.5*pointsTable[team.team3ViceCaptain]
     if (substitute && substitute.sub3Day !== "") {
-      score3 = handleSubstitution(players3, substitute.sub3Day, substitute.sub3In, substitute.sub3Out, 
+      var subLogic = handleSubstitution(players3, substitute.sub3Day, substitute.sub3In, substitute.sub3Out, 
         team.team3Captain, team.team3ViceCaptain, score3, pointsTable);
+
+        score3 = subLogic.score
+        sub3OutScore = subLogic.oldPlayerScoreToAdd
+        sub3InScore = subLogic.newPlayerScoreToAdd
     }
   }
 
@@ -123,16 +145,19 @@ function scorePerTeam(team) {
     score4 += pointsTable[team.team4Captain]
     score4 += 0.5*pointsTable[team.team4ViceCaptain]
     if (substitute && substitute.sub4Day !== "") {
-      score4 = handleSubstitution(players4, substitute.sub4Day, substitute.sub4In, substitute.sub4Out, 
+      var subLogic = handleSubstitution(players4, substitute.sub4Day, substitute.sub4In, substitute.sub4Out, 
         team.team4Captain, team.team4ViceCaptain, score4, pointsTable);
+
+        score4 = subLogic.score
+        sub4OutScore = subLogic.oldPlayerScoreToAdd
+        sub4InScore = subLogic.newPlayerScoreToAdd
     }
   }
 
   
 
   var totalScore = score1+score2+score3+score4;
-
-  return {score1, score2, score3, score4, totalScore};
+  return {score1, score2, score3, score4, totalScore, sub1OutScore, sub1InScore, sub2OutScore, sub2InScore, sub3InScore, sub3OutScore, sub4InScore, sub4OutScore};
 
 }
 
