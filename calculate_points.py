@@ -101,8 +101,8 @@ if __name__ == "__main__":
     file1.write(points)
     file1.write("'")
   
-  team1=""
-  team2=""
+  team1="AUS"
+  team2="IND"
   team1Score=""
   team2Score=""
   j=0
@@ -111,7 +111,7 @@ if __name__ == "__main__":
       team1 = i
       team1Score = scores[i]
     else:
-      team2 = i
+      team2 = "IND"
       team2Score = scores[i]      
     j = j + 1
 
