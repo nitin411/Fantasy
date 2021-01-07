@@ -59,8 +59,6 @@ def parse_how_out(how_out):
       player = data[4:].split(' ')[0]
     if player != "" and player in points:
       points[player] = points[player] + score
-    else:
-      points[player] = score
 
 
 if __name__ == "__main__":
