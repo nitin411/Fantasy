@@ -99,14 +99,23 @@ body{
     }
 
     .banner {
-      background-image: url(assets/banner/Mask\ Group\ 6.png);
+      background-image: url(assets/banner/Mask\ Group\ 6\ 2/Mask\ Group\ 6@2x.png);
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
     }
-/*responsive*/
 
+    .card-body {
+      padding: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .no-margin {
+      margin: 0px
+    }
+/*responsive*/
 @media(max-width: 500px){
 	.table thead{
 		display: none;
@@ -232,6 +241,15 @@ body{
     .card-body2 {
       padding: 0px;
     }
+
+
+}
+
+@media(min-width: 800px) {
+  .banner {
+    height: 300px;
+    padding-top: 20px;
+  }
 }
 
 body, html {
