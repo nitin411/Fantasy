@@ -9,6 +9,7 @@ var day4Snapshot = JSON.parse(data_day_4);
 
 var scores = [];
 
+
 for(var i=0; i<myTeams.length; i++) {
   myTeams[i].scores = scorePerTeam(myTeams[i]);
 }
