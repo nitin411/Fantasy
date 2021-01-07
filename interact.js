@@ -56,7 +56,7 @@ function scorePerTeam(team) {
 
   if (players3){
     for(var i=0; i < players3.length; i++ ) {
-      score3 += pointsTable[players2[i]]
+      score3 += pointsTable[players3[i]]
     }
     score3 += pointsTable[team.team3Captain]
     score3 += 0.5*pointsTable[team.team3ViceCaptain]
@@ -64,7 +64,7 @@ function scorePerTeam(team) {
 
   if (players4){
     for(var i=0; i < players4.length; i++ ) {
-      score4 += pointsTable[players2[i]]
+      score4 += pointsTable[players4[i]]
     }
     score4 += pointsTable[team.team4Captain]
     score4 += 0.5*pointsTable[team.team4ViceCaptain]
