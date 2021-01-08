@@ -84,7 +84,7 @@ if __name__ == "__main__":
     for batsman in inning['batsmen']:
       player = batsman['name'].split(" ")[-1]
       score = calc_batsman_score(batsman)
-      points[player] = score
+      points[player] = points[player] + score
       how_out.append(batsman['howOut'])
     for bowler in inning['bowlers']:
       player = bowler['name'].split(" ")[-1]
@@ -93,7 +93,6 @@ if __name__ == "__main__":
         points[player] = points[player] + score
       else:
         points[player] = score
-
   parse_how_out(how_out)
   points = json.dumps(points)
   with open("points.json", "w") as file1:
@@ -120,4 +119,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2 + "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  commit()
+  # commit()
