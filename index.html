@@ -195,9 +195,9 @@
                   textLink.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub1Day + " "));
                   textLink.appendChild(outIcon);
                   textLink.appendChild(document.createTextNode(") "));
-
+                  text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
                 }
-                text = " - " + (subbed? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
+                
               }
               
               if (boldText) {
@@ -217,7 +217,7 @@
                 inIcon.src = "assets/banner/In.svg";
 
 
-                text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1InScore + "/":"") + points + " pts.";
+                text = " - " + (subbed? myTeams[a].scores.sub1InScore + "/":"") + points + " pts.";
                 var textLink = document.createElement("a");
                 var boldSpan = document.createElement("b");
                 textLink.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub1Day + " "));
@@ -282,9 +282,9 @@
                   textLink2.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub2Day + " "));
                   textLink2.appendChild(outIcon);
                   textLink2.appendChild(document.createTextNode(") "));
-
+                  text2 = " - " + (isPlayerSubOut? myTeams[a].scores.sub2OutScore + "/":"") + points + " pts.";
                 }
-                text2 = " - " + (isPlayerSubOut? myTeams[a].scores.sub2OutScore + "/":"") + points + " pts.";
+                
               
               
               if (boldText2) {

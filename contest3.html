@@ -189,9 +189,9 @@
                   textLink.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub1Day + " "));
                   textLink.appendChild(outIcon);
                   textLink.appendChild(document.createTextNode(") "));
-
+                  text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
                 }
-                text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
+                
               }
               if (boldText) {
                 var boldSpan = document.createElement("b");
@@ -202,7 +202,6 @@
               dropdownDiv.appendChild(textLink);
             }
             if (subbed) {
-                console.log(a);
                 var text = myTeams[a].substitutes.sub1In;
                 var points = pointsTable[text];
                 var boldText = text;
@@ -222,7 +221,6 @@
                 textLink.appendChild(document.createTextNode(text));
                 dropdownDiv.appendChild(textLink);
             }
-            console.log(textLink);
             
 
             var td6 = document.createElement('td');
@@ -277,9 +275,10 @@
                   textLink2.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub2Day + " "));
                   textLink2.appendChild(outIcon);
                   textLink2.appendChild(document.createTextNode(") "));
+                  text2 = " - " + (isPlayerSubOut? myTeams[a].scores.sub2OutScore + "/":"") + points + " pts.";
 
                 }
-                text2 = " - " + (isPlayerSubOut? myTeams[a].scores.sub2OutScore + "/":"") + points + " pts.";
+                
               
               
               if (boldText2) {
@@ -363,9 +362,10 @@
                   textLink3.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub3Day + " "));
                   textLink3.appendChild(outIcon);
                   textLink3.appendChild(document.createTextNode(") "));
+                  text3 = " - " + (isPlayerSubOut? myTeams[a].scores.sub3OutScore + "/":"") + points + " pts.";
 
                 }
-                text3 = " - " + (isPlayerSubOut? myTeams[a].scores.sub3OutScore + "/":"") + points + " pts.";
+                
               
               
               
@@ -451,9 +451,9 @@
                   textLink4.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub4Day + " "));
                   textLink4.appendChild(outIcon);
                   textLink4.appendChild(document.createTextNode(") "));
-
+                  text4 = " - " + (isPlayerSubOut? myTeams[a].scores.sub4OutScore + "/":"") + points + " pts.";
                 }
-                text4 = " - " + (isPlayerSubOut? myTeams[a].scores.sub4OutScore + "/":"") + points + " pts.";
+                
 
               if (boldText4) {
                 var boldSpan4 = document.createElement("b");
