@@ -182,6 +182,7 @@
                 text = " - " + (points*1.5) + " pts."
               } else {
                 boldText = ""+text;
+                text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
                 if (isPlayerSubOut){
                   subbed = true;
                   var outIcon = document.createElement("img");
@@ -189,7 +190,7 @@
                   textLink.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub1Day + " "));
                   textLink.appendChild(outIcon);
                   textLink.appendChild(document.createTextNode(") "));
-                  text = " - " + (isPlayerSubOut? myTeams[a].scores.sub1OutScore + "/":"") + points + " pts.";
+                  
                 }
                 
               }
