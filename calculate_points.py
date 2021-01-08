@@ -111,7 +111,7 @@ if __name__ == "__main__":
       team1 = i
       team1Score = scores[i]
     else:
-      team2 = "IND"
+      team2 = i
       team2Score = scores[i]      
     j = j + 1
 
