@@ -94,11 +94,8 @@ if __name__ == "__main__":
         points[player] = points[player] + score
       else:
         points[player] = score
-<<<<<<< HEAD
       print("Bowling after " + str(player) + str(points[player]))
 
-=======
->>>>>>> 184832ebd5bc3f78d4bd620a538654196d22029b
   parse_how_out(how_out)
   points = json.dumps(points)
   with open("points.json", "w") as file1:
