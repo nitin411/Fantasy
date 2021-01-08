@@ -51,7 +51,7 @@ def parse_how_out(how_out):
     player = ""
     if data[0: 2] == 'c:':
       player = data[3:].split(' ')[0]
-    elif data[0:3] == 'c&b:':
+    elif data[0:3] == 'c&b':
       player = data[5:]
     elif data[0:7] == 'run out':
       player = data[9:-1]
