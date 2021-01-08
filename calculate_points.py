@@ -36,6 +36,7 @@ def calc_batsman_score(data):
   return score
 
 def calc_bowler_score(data):
+  print(str(data))
   score = 0
   wickets = data['wickets']
   if wickets:
@@ -93,6 +94,11 @@ if __name__ == "__main__":
         points[player] = points[player] + score
       else:
         points[player] = score
+<<<<<<< HEAD
+      print("Bowling after " + str(player) + str(points[player]))
+
+=======
+>>>>>>> 184832ebd5bc3f78d4bd620a538654196d22029b
   parse_how_out(how_out)
   points = json.dumps(points)
   with open("points.json", "w") as file1:
@@ -119,4 +125,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2 + "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  commit()
+  #commit()
