@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-scoreboard = '{"match": 3,"location":"Sydney","scoreBreakUp": [{"batting": "IND","score": "11/0"},{"batting": "AUS","score": "338/10"}],"overs": "4.1"}'
-=======
-scoreboard = '{"match": 3,"location":"Sydney","scoreBreakUp": [{"batting": "IND","score": "11/0"},{"batting": "AUS","score": "338/10"}],"overs": "4.2"}'
->>>>>>> bd99b987de9d181675d34bab2605dc7e6c4d5066
+scoreboard = '{"match": 3,"location":"Sydney","scoreBreakUp": [{"batting": "IND","score": "22/0"},{"batting": "AUS","score": "338/10"}],"overs": "5.2"}'
