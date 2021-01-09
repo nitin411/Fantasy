@@ -391,12 +391,12 @@
 
                 text = " - " + (subbed? myTeams[a].scores.sub3InScore + "/":"") + points + " pts.";
                 var textLink3 = document.createElement("a");
-                var boldSpan = document.createElement("b");
+                var boldSpan3 = document.createElement("b");
                 textLink3.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub3Day + " "));
                 textLink3.appendChild(inIcon);
                 textLink3.appendChild(document.createTextNode(") "));
-                boldSpan.appendChild(document.createTextNode(boldText3));
-                textLink3.appendChild(boldSpan);
+                boldSpan3.appendChild(document.createTextNode(boldText3));
+                textLink3.appendChild(boldSpan3);
                 textLink3.appendChild(document.createTextNode(text));
                 dropdownDiv3.appendChild(textLink3);
             }
@@ -477,12 +477,12 @@
 
                 text4 = " - " + (subbed? myTeams[a].scores.sub4InScore + "/":"") + points + " pts.";
                 var textLink4 = document.createElement("a");
-                var boldSpan = document.createElement("b");
+                var boldSpan4 = document.createElement("b");
                 textLink4.appendChild(document.createTextNode("(D" + myTeams[a].substitutes.sub4Day + " "));
                 textLink4.appendChild(inIcon);
                 textLink4.appendChild(document.createTextNode(") "));
-                boldSpan.appendChild(document.createTextNode(boldText3));
-                textLink4.appendChild(boldSpan);
+                boldSpan4.appendChild(document.createTextNode(boldText3));
+                textLink4.appendChild(boldSpan4);
                 textLink4.appendChild(document.createTextNode(text4));
                 dropdownDiv4.appendChild(textLink4);
             }
