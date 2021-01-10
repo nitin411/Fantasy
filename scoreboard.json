@@ -1,1 +1,1 @@
-scoreboard = '{"match": 3,"location":"Sydney","scoreBreakUp": [{"batting": "AUS","score": "312/6 and 338/10"},{"batting": "IND","score": "244/10"}],"overs": "87.0"}'
+scoreboard = '{"match": 3,"location":"Sydney","scoreBreakUp": [{"batting": "IND","score": "2/0 and 244/10"},{"batting": "AUS","score": "312/6 and 338/10"}],"overs": "0.1"}'
