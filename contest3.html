@@ -367,10 +367,7 @@
                   text3 = " - " + (isPlayerSubOut? myTeams[a].scores.sub3OutScore + "/":"") + points + " pts.";
 
                 }
-                
-              
-              
-              
+                     
               if (boldText3) {
                 var boldSpan3x = document.createElement("b");
                 boldSpan3x.appendChild(document.createTextNode(boldText3));
@@ -397,7 +394,7 @@
                 textLink3.appendChild(inIcon);
                 textLink3.appendChild(document.createTextNode(") "));
                 boldSpan3.appendChild(document.createTextNode(boldText3));
-                textLink3.appendChild(boldSpan);
+                textLink3.appendChild(boldSpan3);
                 textLink3.appendChild(document.createTextNode(text));
                 dropdownDiv3.appendChild(textLink3);
             }
