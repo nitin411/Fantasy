@@ -11,8 +11,8 @@ if __name__ == "__main__":
   for n in range(0,int(number)):
     out+='{'
     teamName = input("Enter the team Name number " + str(n+1) + ":")
-    player1 = input("Enter the player1 name : ")
-    player2 = input("Enter the player2 name : ")
+    player1 = input("Enter the player 1 name : ")
+    player2 = input("Enter the player 2 name : ")
     player1Team=[]
     player2Team=[]
     for i in range(0,7):
