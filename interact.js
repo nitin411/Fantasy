@@ -11,7 +11,38 @@ var scores = [];
 
 
 for(var i=0; i<myTeams.length; i++) {
+
+  myTeams[i].team1 = myTeams[i].team1.map(function(v) {
+    return v.toLowerCase();
+  })
+  myTeams[i].team2 = myTeams[i].team2.map(function(v) {
+    return v.toLowerCase();
+  })
+
+  if (myTeams[i].team3) {
+    myTeams[i].team3 = myTeams[i].team3.map(function(v) {
+      return v.toLowerCase();
+    })
+  } else {
+    myTeams[i].team3Captain = "";
+    myTeams[i].team3ViceCaptain = "";
+  }
+
+  if (myTeams[i].team4) {
+    myTeams[i].team4 = myTeams[i].team4.map(function(v) {
+      return v.toLowerCase();
+    })
+  } else {
+    myTeams[i].team4Captain = "";
+    myTeams[i].team4ViceCaptain = "";
+  }
+
+
   myTeams[i].scores = scorePerTeam(myTeams[i]);
+  myTeams[i].players = [myTeams[i].player1, myTeams[i].player2, myTeams[i].player3, myTeams[i].player4]
+  myTeams[i].teams = [myTeams[i].team1, myTeams[i].team2, myTeams[i].team3, myTeams[i].team4]
+  myTeams[i].teamCaptains = [myTeams[i].team1Captain.toLowerCase(), myTeams[i].team2Captain.toLowerCase(), myTeams[i].team3Captain.toLowerCase(), myTeams[i].team4Captain.toLowerCase()]
+  myTeams[i].teamViceCaptains = [myTeams[i].team1ViceCaptain.toLowerCase(), myTeams[i].team2ViceCaptain.toLowerCase(), myTeams[i].team3ViceCaptain.toLowerCase(), myTeams[i].team4ViceCaptain.toLowerCase()]
 }
 
 myTeams.sort(function(a, b) {
@@ -59,6 +90,7 @@ function handleSubstitution(team, subDay, subIn, subOut, captain, viceCaptain, s
   var multiplier = 1;
   var snapshot = getSnapshotFromDay(subDay)
   if (team.includes(subOut)) {
+
     if (subOut === captain) {
       multiplier = 2;
     } else if (subOut === viceCaptain) {
@@ -67,7 +99,8 @@ function handleSubstitution(team, subDay, subIn, subOut, captain, viceCaptain, s
 
     var oldPlayerTotalScore = pointsTable[subOut]*multiplier;
     var oldPlayerScoreToAdd = snapshot[subOut]*multiplier;
-    var newPlayerScoreToAdd = (pointsTable[subIn] - snapshot[subIn])*multiplier;
+    // Removing the multiplier because sub in should only have 1x points, even if he is C/VC
+    var newPlayerScoreToAdd = (pointsTable[subIn] - snapshot[subIn]);
     score = score + newPlayerScoreToAdd + oldPlayerScoreToAdd - oldPlayerTotalScore;
     
     return {score, oldPlayerScoreToAdd, newPlayerScoreToAdd};
@@ -76,88 +109,40 @@ function handleSubstitution(team, subDay, subIn, subOut, captain, viceCaptain, s
 }
 
 function scorePerTeam(team) {
-  var players1 = team.team1;
-  var players2 = team.team2;
-  var players3 = team.team3;
-  var players4 = team.team4;
-  var score1 = 0;
-  var score2 = 0;
-  var score3 = 0;
-  var score4 = 0;
+  var players = [team.team1, team.team2, team.team3, team.team4]
+  var scores = [0, 0, 0, 0]
+  var bonuses = [0, 0, 0, 0]
+  var subInScores = [0, 0, 0, 0]
+  var subOutScores = [0, 0, 0, 0]
+  var teamCaptains = [team.team1Captain, team.team2Captain, team.team3Captain, team.team4Captain]
+  var teamViceCaptains = [team.team1ViceCaptain, team.team2ViceCaptain, team.team3ViceCaptain, team.team4ViceCaptain]
   var substitute = team.substitutes;
-  var sub1InScore = 0;
-  var sub1OutScore = 0;
-  var sub2InScore = 0;
-  var sub2OutScore = 0;
-  var sub3InScore = 0;
-  var sub3OutScore = 0;
-  var sub4InScore = 0;
-  var sub4OutScore = 0;
 
-  for(var i=0; i < players1.length; i++ ) {
-    score1 += pointsTable[players1[i]]
-  }
-  score1 += pointsTable[team.team1Captain]
-  score1 += 0.5*pointsTable[team.team1ViceCaptain]
-  if (substitute && substitute.sub1Day !== "") {
-    var subLogic = handleSubstitution(players1, substitute.sub1Day, substitute.sub1In, substitute.sub1Out, 
-      team.team1Captain, team.team1ViceCaptain, score1, pointsTable);
+  for (var j=0; j<players.length; j++){
+    if (players[j]) {
+      for(var i=0; i < players[j].length; i++ ) {
+        scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]
+        bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]
+      }
 
-    score1 = subLogic.score
-    sub1OutScore = subLogic.oldPlayerScoreToAdd
-    sub1InScore = subLogic.newPlayerScoreToAdd
-  }
+      scores[j] += pointsTable[teamCaptains[j].toLowerCase()]["score"]
+      bonuses[j] += pointsTable[teamCaptains[j].toLowerCase()]["bonus"]
+      scores[j] += 0.5*pointsTable[teamViceCaptains[j].toLowerCase()]["score"]
+      bonuses[j] += 0.5*pointsTable[teamViceCaptains[j].toLowerCase()]["bonus"]
 
-  for(var i=0; i < players2.length; i++ ) {
-    score2 += pointsTable[players2[i]]
-  }
-  score2 += pointsTable[team.team2Captain]
-  score2 += 0.5*pointsTable[team.team2ViceCaptain]
-  if (substitute && substitute.sub2Day !== "") {
-    var subLogic = handleSubstitution(players2, substitute.sub2Day, substitute.sub2In, substitute.sub2Out, 
-      team.team2Captain, team.team2ViceCaptain, score2, pointsTable);
-      console.log(subLogic);
-      score2 = subLogic.score
-      sub2OutScore = subLogic.oldPlayerScoreToAdd
-      sub2InScore = subLogic.newPlayerScoreToAdd
-  }
+      // if (substitute && substitute.sub1Day !== "") {
+      //   var subLogic = handleSubstitution(players[j], substitute.player[j]["day"], substitute.player[j]["in"], substitute.player[j]["out"], 
+      //   teamCaptains[j], teamViceCaptains[j], scores[j], pointsTable);
 
-  if (players3){
-    for(var i=0; i < players3.length; i++ ) {
-      score3 += pointsTable[players3[i]]
-    }
-    score3 += pointsTable[team.team3Captain]
-    score3 += 0.5*pointsTable[team.team3ViceCaptain]
-    if (substitute && substitute.sub3Day !== "") {
-      var subLogic = handleSubstitution(players3, substitute.sub3Day, substitute.sub3In, substitute.sub3Out, 
-        team.team3Captain, team.team3ViceCaptain, score3, pointsTable);
-
-        score3 = subLogic.score
-        sub3OutScore = subLogic.oldPlayerScoreToAdd
-        sub3InScore = subLogic.newPlayerScoreToAdd
+      //   scores[j] = subLogic.score
+      //   subOutScores[j] = subLogic.oldPlayerScoreToAdd
+      //   subInScores[j] = subLogic.newPlayerScoreToAdd
+      // }
     }
   }
-
-  if (players4){
-    for(var i=0; i < players4.length; i++ ) {
-      score4 += pointsTable[players4[i]]
-    }
-    score4 += pointsTable[team.team4Captain]
-    score4 += 0.5*pointsTable[team.team4ViceCaptain]
-    if (substitute && substitute.sub4Day !== "") {
-      var subLogic = handleSubstitution(players4, substitute.sub4Day, substitute.sub4In, substitute.sub4Out, 
-        team.team4Captain, team.team4ViceCaptain, score4, pointsTable);
-
-        score4 = subLogic.score
-        sub4OutScore = subLogic.oldPlayerScoreToAdd
-        sub4InScore = subLogic.newPlayerScoreToAdd
-    }
-  }
-
   
-
-  var totalScore = score1+score2+score3+score4;
-  return {score1, score2, score3, score4, totalScore, sub1OutScore, sub1InScore, sub2OutScore, sub2InScore, sub3InScore, sub3OutScore, sub4InScore, sub4OutScore};
+  var totalScore = scores.reduce((a, b) => a + b, 0)
+  return {scores, totalScore, subOutScores, subInScores};
 
 }
 

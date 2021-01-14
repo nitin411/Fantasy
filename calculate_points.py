@@ -25,26 +25,27 @@ def  fetch():
 
 def calc_batsman_score(data):
   score = 0
+  bonus = 0
   run = data['runs']
   if run:
     run = int(run)
     score = run
     if run >= 50:
-      score += 5
+      bonus += 5
     if run >= 100:
-      score += 5
-  return score
+      bonus += 5
+  return (score, bonus)
 
 def calc_bowler_score(data):
-  print(str(data))
   score = 0
+  bonus = 0
   wickets = data['wickets']
   if wickets:
     wickets = int(wickets)
     score = wickets * 15
     if wickets >= 5:
       score += 10
-  return score
+  return (score, bonus)
 
 def parse_how_out(how_out):
   for data in how_out:
@@ -58,8 +59,9 @@ def parse_how_out(how_out):
       player = data[9:-1]
     elif data[0: 2] == 'st':
       player = data[4:].split(' ')[0]
+    player = player.lower()
     if player != "" and player in points:
-      points[player] = points[player] + score
+      points[player]["score"] = points[player]["score"] + score
 
 
 if __name__ == "__main__":
@@ -67,7 +69,13 @@ if __name__ == "__main__":
   commit()
   data=fetch()
   innings = data['fullScorecard']['innings']
-  points = {"Rahane": 0, "Ashwin": 0, "Bumrah": 0, "Jadeja": 0, "Pujara": 0, "Sharma": 0, "Labuschagne": 0, "Smith": 0, "Warner": 0, "Agarwal": 0, "Yadav": 0, "Pant": 0, "Rahul": 0, "Cummins": 0, "Green": 0, "Hazlewood": 0, "Head": 0, "Lyon": 0, "Pattinson": 0, "Starc": 0, "Siraj": 0, "Natarajan": 0, "Saha": 0, "Saini": 0, "Shaw": 0, "Gill": 0, "Thakur": 0, "Vihari": 0, "Paine": 0, "Henriques": 0, "Neser": 0, "Pucovski": 0, "Swepson": 0, "Wade": 0, "Abbott": 0}
+  players = ['Agarwal', 'Paine', 'Lyon', 'Sharma', 'Saha', 'Hazlewood', 'Jadeja', 'Cummins', 'Neser', 'Saini', 'Smith', 'Abbott', 'Green', 'Thakur', 'Siraj', 'Pujara', 'Pucovski', 'Warner', 'Gill', 'Natarajan', 'Head', 'Vihari', 'Starc', 'Henriques', 'Pant', 'Shaw', 'Labuschagne', 'Bumrah', 'Ashwin', 'Pattinson', 'Rahane', 'Wade', 'Swepson', 'Yadav', 'Rahul']
+  points = {}
+  for player in players:
+    points[player.lower()] = {
+      "score": 0,
+      "bonus": 0
+    }
   how_out = []
   scores = {}
   for inning in innings:
@@ -84,17 +92,21 @@ if __name__ == "__main__":
       else:
         scores[team]=inning['run'] + "/" + inning['wicket']
     for batsman in inning['batsmen']:
-      player = batsman['name'].split(" ")[-1]
+      player = batsman['name'].split(" ")[-1].lower()
       score = calc_batsman_score(batsman)
-      points[player] = points[player] + score
+      print(score)
+      points[player]["score"] = points[player]["score"] + score[0]
+      points[player]["bonus"] = points[player]["bonus"] + score[1]
       how_out.append(batsman['howOut'])
     for bowler in inning['bowlers']:
-      player = bowler['name'].split(" ")[-1]
+      player = bowler['name'].split(" ")[-1].lower()
       score = calc_bowler_score(bowler)
+      print(score)
       if player in points:
-        points[player] = points[player] + score
+        points[player]["score"] = points[player]["score"] + score[0]
+        points[player]["bonus"] = points[player]["bonus"] + score[1]
       else:
-        points[player] = score
+        points[player]["score"] = score
       print("Bowling after " + str(player) + str(points[player]))
 
   parse_how_out(how_out)
@@ -123,4 +135,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2 + "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  commit()
+  # commit()
