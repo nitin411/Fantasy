@@ -44,7 +44,7 @@ class teams:
     self.team3Captain = team3Captain
     self.team3ViceCaptain = team3ViceCaptain
 
-  def setPlayer2(self, player4, team4, team4Captain, team4ViceCaptain):
+  def setPlayer4(self, player4, team4, team4Captain, team4ViceCaptain):
     self.player4 = player4 
     self.team4 = team4
     self.team4Captain = team4Captain
