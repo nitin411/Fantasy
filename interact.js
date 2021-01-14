@@ -8,46 +8,54 @@ var day3Snapshot = JSON.parse(data_day_3);
 var day4Snapshot = JSON.parse(data_day_4);
 
 var scores = [];
+var teams = [];
 
-
+console.log(myTeams.length)
 for(var i=0; i<myTeams.length; i++) {
 
-  myTeams[i].team1 = myTeams[i].team1.map(function(v) {
-    return v.toLowerCase();
-  })
-  myTeams[i].team2 = myTeams[i].team2.map(function(v) {
-    return v.toLowerCase();
-  })
-
-  if (myTeams[i].team3) {
-    myTeams[i].team3 = myTeams[i].team3.map(function(v) {
+  if (myTeams[i].team1 != null && myTeams[i].team2 != null) {
+    myTeams[i].team1 = myTeams[i].team1.map(function(v) {
       return v.toLowerCase();
     })
-  } else {
-    myTeams[i].team3Captain = "";
-    myTeams[i].team3ViceCaptain = "";
-  }
-
-  if (myTeams[i].team4) {
-    myTeams[i].team4 = myTeams[i].team4.map(function(v) {
+    myTeams[i].team2 = myTeams[i].team2.map(function(v) {
       return v.toLowerCase();
     })
-  } else {
-    myTeams[i].team4Captain = "";
-    myTeams[i].team4ViceCaptain = "";
+
+    if (myTeams[i].team3) {
+      myTeams[i].team3 = myTeams[i].team3.map(function(v) {
+        return v.toLowerCase();
+      })
+    } else {
+      myTeams[i].team3Captain = "";
+      myTeams[i].team3ViceCaptain = "";
+    }
+
+    if (myTeams[i].team4) {
+      myTeams[i].team4 = myTeams[i].team4.map(function(v) {
+        return v.toLowerCase();
+      })
+    } else {
+      myTeams[i].team4Captain = "";
+      myTeams[i].team4ViceCaptain = "";
+    }
+
+    console.log(myTeams[i])
+    myTeams[i].scores = scorePerTeam(myTeams[i]);
+    myTeams[i].players = [myTeams[i].player1, myTeams[i].player2, myTeams[i].player3, myTeams[i].player4]
+    myTeams[i].teams = [myTeams[i].team1, myTeams[i].team2, myTeams[i].team3, myTeams[i].team4]
+    myTeams[i].teamCaptains = [myTeams[i].team1Captain.toLowerCase(), myTeams[i].team2Captain.toLowerCase(), myTeams[i].team3Captain.toLowerCase(), myTeams[i].team4Captain.toLowerCase()]
+    myTeams[i].teamViceCaptains = [myTeams[i].team1ViceCaptain.toLowerCase(), myTeams[i].team2ViceCaptain.toLowerCase(), myTeams[i].team3ViceCaptain.toLowerCase(), myTeams[i].team4ViceCaptain.toLowerCase()]
+  
+    teams.push(myTeams[i])
   }
 
-
-  myTeams[i].scores = scorePerTeam(myTeams[i]);
-  myTeams[i].players = [myTeams[i].player1, myTeams[i].player2, myTeams[i].player3, myTeams[i].player4]
-  myTeams[i].teams = [myTeams[i].team1, myTeams[i].team2, myTeams[i].team3, myTeams[i].team4]
-  myTeams[i].teamCaptains = [myTeams[i].team1Captain.toLowerCase(), myTeams[i].team2Captain.toLowerCase(), myTeams[i].team3Captain.toLowerCase(), myTeams[i].team4Captain.toLowerCase()]
-  myTeams[i].teamViceCaptains = [myTeams[i].team1ViceCaptain.toLowerCase(), myTeams[i].team2ViceCaptain.toLowerCase(), myTeams[i].team3ViceCaptain.toLowerCase(), myTeams[i].team4ViceCaptain.toLowerCase()]
 }
 
+myTeams = teams
 myTeams.sort(function(a, b) {
   return b.scores.totalScore - a.scores.totalScore;
 });
+console.log(myTeams.length)
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
