@@ -64,6 +64,7 @@ def parse_how_out(how_out):
 
 if __name__ == "__main__":
   print("Executing")
+  commit()
   data=fetch()
   innings = data['fullScorecard']['innings']
   points = {"Rahane": 0, "Ashwin": 0, "Bumrah": 0, "Jadeja": 0, "Pujara": 0, "Sharma": 0, "Labuschagne": 0, "Smith": 0, "Warner": 0, "Agarwal": 0, "Yadav": 0, "Pant": 0, "Rahul": 0, "Cummins": 0, "Green": 0, "Hazlewood": 0, "Head": 0, "Lyon": 0, "Pattinson": 0, "Starc": 0, "Siraj": 0, "Natarajan": 0, "Saha": 0, "Saini": 0, "Shaw": 0, "Gill": 0, "Thakur": 0, "Vihari": 0, "Paine": 0, "Henriques": 0, "Neser": 0, "Pucovski": 0, "Swepson": 0, "Wade": 0, "Abbott": 0}
