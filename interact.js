@@ -1,27 +1,39 @@
 var pointsTable = JSON.parse(data);
 var myTeams = JSON.parse(teams);
 var scoreboard = JSON.parse(scoreboard);
+var subs = JSON.parse(subs);
 
-var day1Snapshot = JSON.parse(day1Snap);
-var day2Snapshot = JSON.parse(data_day_2);
-var day3Snapshot = JSON.parse(data_day_3);
-var day4Snapshot = JSON.parse(data_day_4);
+var day1Snapshot = JSON.parse(data_day_1);
+// var day2Snapshot = JSON.parse(data_day_2);
+// var day3Snapshot = JSON.parse(data_day_3);
+// var day4Snapshot = JSON.parse(data_day_4);
 
 var scores = [];
 var teams = [];
 
-console.log(myTeams.length)
 for(var i=0; i<myTeams.length; i++) {
 
+  var teamName = myTeams[i].teamName;
+  var subsForTeam = [];
+  var players = 0;
+
   if (myTeams[i].team1 != null && myTeams[i].team2 != null) {
+    
+    myTeams[i].subs = [{}, {}]
+
+    players+=1
     myTeams[i].team1 = myTeams[i].team1.map(function(v) {
       return v.toLowerCase();
     })
+
+    players+=1;
     myTeams[i].team2 = myTeams[i].team2.map(function(v) {
       return v.toLowerCase();
     })
 
     if (myTeams[i].team3) {
+      players += 1; 
+      myTeams[i].subs.push({})
       myTeams[i].team3 = myTeams[i].team3.map(function(v) {
         return v.toLowerCase();
       })
@@ -31,6 +43,8 @@ for(var i=0; i<myTeams.length; i++) {
     }
 
     if (myTeams[i].team4) {
+      players += 1;
+      myTeams[i].subs.push({})
       myTeams[i].team4 = myTeams[i].team4.map(function(v) {
         return v.toLowerCase();
       })
@@ -39,25 +53,46 @@ for(var i=0; i<myTeams.length; i++) {
       myTeams[i].team4ViceCaptain = "";
     }
 
-    console.log(myTeams[i])
-    myTeams[i].scores = scorePerTeam(myTeams[i]);
+  
+
     myTeams[i].players = [myTeams[i].player1, myTeams[i].player2, myTeams[i].player3, myTeams[i].player4]
     myTeams[i].teams = [myTeams[i].team1, myTeams[i].team2, myTeams[i].team3, myTeams[i].team4]
     myTeams[i].teamCaptains = [myTeams[i].team1Captain.toLowerCase(), myTeams[i].team2Captain.toLowerCase(), myTeams[i].team3Captain.toLowerCase(), myTeams[i].team4Captain.toLowerCase()]
     myTeams[i].teamViceCaptains = [myTeams[i].team1ViceCaptain.toLowerCase(), myTeams[i].team2ViceCaptain.toLowerCase(), myTeams[i].team3ViceCaptain.toLowerCase(), myTeams[i].team4ViceCaptain.toLowerCase()]
-  
+
+
+    for (var j=0; j< subs.length; j++) {
+      if (subs[j].teamName.toLowerCase() === teamName.toLowerCase()) {
+        for (var k=0; k<players; k++){
+          if (myTeams[i].players[k].toLowerCase().includes(subs[j].playerName.toLowerCase())) {
+            myTeams[i].subs[k] = subs[j]
+            myTeams[i].subs[k]["subIn"] = myTeams[i].subs[k]["subIn"].toLowerCase()
+            myTeams[i].subs[k]["subOut"] = myTeams[i].subs[k]["subOut"].toLowerCase()
+            subs[j]["marked"] = true;
+          }
+        }
+      }
+    }
+
     teams.push(myTeams[i])
+    myTeams[i].scores = scorePerTeam(myTeams[i]);
   }
 
 }
+
+var badSubs = [];
+for(var i=0; i< subs.length; i++) {
+  if (!subs[i]["marked"]) {
+    badSubs.push(subs[i])
+  }
+}
+console.log(badSubs)
+console.log(myTeams)
 
 myTeams = teams
 myTeams.sort(function(a, b) {
   return b.scores.totalScore - a.scores.totalScore;
 });
-console.log(myTeams.length)
-
-console.log(myTeams)
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
@@ -85,7 +120,7 @@ window.onclick = function(event) {
 }
 
 function getSnapshotFromDay(day) {
-  if (day === "1") {
+  if (day === 1) {
     return day1Snapshot
   } else if (day === "2") {
     return day2Snapshot
@@ -126,33 +161,50 @@ function scorePerTeam(team) {
   var subOutScores = [0, 0, 0, 0]
   var teamCaptains = [team.team1Captain, team.team2Captain, team.team3Captain, team.team4Captain]
   var teamViceCaptains = [team.team1ViceCaptain, team.team2ViceCaptain, team.team3ViceCaptain, team.team4ViceCaptain]
-  var substitute = team.substitutes;
 
+  team["playerPoints"] = []
   for (var j=0; j<players.length; j++){
     if (players[j]) {
+      team["playerPoints"].push({})
+      var subbed = false;
       for(var i=0; i < players[j].length; i++ ) {
-        scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]
-        bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]
+
+        var multiplier = 1;
+        var isSubOut = team.subs[j] && (team.subs[j]["subOut"] === players[j][i])
+        var isCaptain = teamCaptains[j] === players[j][i]
+        var isViceCaptain = teamViceCaptains[j] == players[j][i]
+
+        if (isCaptain) multiplier = 2;
+        if (isViceCaptain) multiplier = 1.5;
+
+        if (isSubOut) {
+          subbed = true;
+          var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+          team["playerPoints"][j][players[j][i].toLowerCase()] = [snapshot[players[j][i].toLowerCase()]["score"]*multiplier + snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier]
+          scores[j] += snapshot[players[j][i].toLowerCase()]["score"]*multiplier
+          bonuses[j] += snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier
+        } else {
+          team["playerPoints"][j][players[j][i].toLowerCase()] = [pointsTable[players[j][i].toLowerCase()]["score"]*multiplier + pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier]
+          scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]*multiplier
+          bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier
+        }
       }
 
-      scores[j] += pointsTable[teamCaptains[j].toLowerCase()]["score"]
-      bonuses[j] += pointsTable[teamCaptains[j].toLowerCase()]["bonus"]
-      scores[j] += 0.5*pointsTable[teamViceCaptains[j].toLowerCase()]["score"]
-      bonuses[j] += 0.5*pointsTable[teamViceCaptains[j].toLowerCase()]["bonus"]
 
-      // if (substitute && substitute.sub1Day !== "") {
-      //   var subLogic = handleSubstitution(players[j], substitute.player[j]["day"], substitute.player[j]["in"], substitute.player[j]["out"], 
-      //   teamCaptains[j], teamViceCaptains[j], scores[j], pointsTable);
+      if (subbed) {
+        var playerName = team.subs[j]["subIn"].toLowerCase();
+        var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+        team["playerPoints"][j][playerName] = [pointsTable[playerName]["score"] - snapshot[playerName]["score"]]
+        scores[j] += pointsTable[playerName]["score"] - snapshot[playerName]["score"]
+      } 
 
-      //   scores[j] = subLogic.score
-      //   subOutScores[j] = subLogic.oldPlayerScoreToAdd
-      //   subInScores[j] = subLogic.newPlayerScoreToAdd
-      // }
     }
   }
   
+  console.log(team);
   var totalScore = scores.reduce((a, b) => a + b, 0)
-  return {scores, totalScore, subOutScores, subInScores};
+  totalScore += bonuses.reduce((a, b) => a + b, 0)
+  return {scores, bonuses, totalScore, subOutScores, subInScores};
 
 }
 
