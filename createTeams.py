@@ -62,6 +62,7 @@ if __name__ == "__main__":
       silverPlayers = getPlayersWithLastNamesAndLowerCase(row['Silver Players'])
       bronzePlayers = getPlayersWithLastNamesAndLowerCase(row['Bronze Players'])
       captain = row['Captain'].strip().split(' ')[1].lower()
+      print(playerName)
       viceCaptain = row['Vice Captain'].strip().split(' ')[1].lower()
       teamNameToFullTeamDict[teamName] = teams(teamName, playerName, goldPlayers + silverPlayers + bronzePlayers, captain, viceCaptain)
     else:
@@ -73,7 +74,7 @@ if __name__ == "__main__":
       captain2 = row['Captain'].strip().split(' ')[1].lower()
       viceCaptain2 = row['Vice Captain'].strip().split(' ')[1].lower()
       teamNameToFullTeamDict[teamName].setPlayer2(playerName2, goldPlayers2 + silverPlayers2 + bronzePlayers2, captain2, viceCaptain2)
-  with open("./data_files/teams/teams1.json", "w") as file1:
+  with open("./data_files/teams/teams.json", "w") as file1:
     file1.write("teams = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")

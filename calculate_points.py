@@ -69,7 +69,7 @@ if __name__ == "__main__":
   commit()
   data=fetch()
   innings = data['fullScorecard']['innings']
-  players = ['Agarwal', 'Paine', 'Lyon', 'Sharma', 'Saha', 'Hazlewood', 'Jadeja', 'Cummins', 'Neser', 'Saini', 'Smith', 'Abbott', 'Green', 'Thakur', 'Siraj', 'Pujara', 'Pucovski', 'Warner', 'Gill', 'Natarajan', 'Head', 'Vihari', 'Starc', 'Henriques', 'Pant', 'Shaw', 'Labuschagne', 'Bumrah', 'Ashwin', 'Pattinson', 'Rahane', 'Wade', 'Swepson', 'Yadav', 'Rahul']
+  players = ['Agarwal', 'Paine', 'Lyon', 'Sharma', 'Saha', 'Hazlewood', 'Jadeja', 'Cummins', 'Neser', 'Saini', 'Smith', 'Abbott', 'Green', 'Thakur', 'Siraj', 'Pujara', 'Pucovski', 'Warner', 'Gill', 'Natarajan', 'Head', 'Vihari', 'Starc', 'Henriques', 'Pant', 'Shaw', 'Labuschagne', 'Bumrah', 'Ashwin', 'Pattinson', 'Rahane', 'Wade', 'Swepson', 'Yadav', 'Rahul', 'Sundar', 'Harris']
   points = {}
   for player in players:
     points[player.lower()] = {

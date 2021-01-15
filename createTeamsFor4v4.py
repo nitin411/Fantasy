@@ -97,7 +97,7 @@ if __name__ == "__main__":
         teamNameToFullTeamDict[teamName].setPlayer3(playerName2, goldPlayers2 + silverPlayers2 + bronzePlayers2, captain2, viceCaptain2)
       else:
         teamNameToFullTeamDict[teamName].setPlayer4(playerName2, goldPlayers2 + silverPlayers2 + bronzePlayers2, captain2, viceCaptain2)
-  with open("./data_files/teams/4v4_1.json", "w") as file1:
+  with open("./data_files/teams/4v4_2.json", "w") as file1:
     file1.write("teams = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")
