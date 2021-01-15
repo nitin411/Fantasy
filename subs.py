@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 
+
 class teams:
   teamName = ""
   playerName = ""
@@ -17,11 +18,29 @@ class teams:
 
 if __name__ == "__main__":
   data = pd.read_excel("./data_files/Subs.xlsx")
-  dataFrame = pd.DataFrame(data, columns= ['Team Name','Player Name', 'Sub In', 'Sub Out', 'Sub Day'])
+  dataFrame = pd.DataFrame(data)
   subs = []
+  firstRow = ""
   for index, row in dataFrame.iterrows():
-  	subs.append(teams(row['Team Name'], row['Player Name'], row['Sub In'], row['Sub Out'], row['Sub Day']))
-  with open("./data_files/teams/subs.json", "w") as file1:
+    playerName = ""
+    teamName=""
+    subIn=""
+    subOut=""
+    subDay=1
+    if index==0:
+      firstRow = row
+    else:
+      for (columnName, columnData) in row.iteritems():
+        if columnName=="Your Name":
+          playerName = columnData.lower()
+        if columnName=="Team Name":
+          teamName = columnData.lower()
+        if columnData == "Sub in":
+          subIn = columnName.split(' ')[2][:-1]
+        if columnData == "Sub out":
+          subOut = columnName.split(' ')[2][:-1]
+      subs.append(teams(teamName, playerName, subIn, subOut, subDay))
+  with open("./data_files/teams_subs/subs_iiitd.json", "w") as file1:
     file1.write("subs = '")
     json_string = json.dumps([ob.__dict__ for ob in subs])
     file1.write(json_string)
