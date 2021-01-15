@@ -62,6 +62,7 @@ if __name__ == "__main__":
       silverPlayers = getPlayersWithLastNamesAndLowerCase(row['Silver Players'])
       bronzePlayers = getPlayersWithLastNamesAndLowerCase(row['Bronze Players'])
       captain = row['Captain'].strip().split(' ')[1].lower()
+      print(playerName)
       viceCaptain = row['Vice Captain'].strip().split(' ')[1].lower()
       teamNameToFullTeamDict[teamName] = teams(teamName, playerName, goldPlayers + silverPlayers + bronzePlayers, captain, viceCaptain)
     else:

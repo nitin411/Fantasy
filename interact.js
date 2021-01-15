@@ -57,6 +57,8 @@ myTeams.sort(function(a, b) {
 });
 console.log(myTeams.length)
 
+console.log(myTeams)
+
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
