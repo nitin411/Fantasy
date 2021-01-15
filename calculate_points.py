@@ -66,7 +66,7 @@ def parse_how_out(how_out):
 
 if __name__ == "__main__":
   print("Executing")
-  commit()
+ # commit()
   data=fetch()
   innings = data['fullScorecard']['innings']
   players = ['Agarwal', 'Paine', 'Lyon', 'Sharma', 'Saha', 'Hazlewood', 'Jadeja', 'Cummins', 'Neser', 'Saini', 'Smith', 'Abbott', 'Green', 'Thakur', 'Siraj', 'Pujara', 'Pucovski', 'Warner', 'Gill', 'Natarajan', 'Head', 'Vihari', 'Starc', 'Henriques', 'Pant', 'Shaw', 'Labuschagne', 'Bumrah', 'Ashwin', 'Pattinson', 'Rahane', 'Wade', 'Swepson', 'Yadav', 'Rahul', 'Sundar', 'Harris']
@@ -77,7 +77,7 @@ if __name__ == "__main__":
       "bonus": 0
     }
   how_out = []
-  scores = {}
+  scores = {'IND' : '0'}
   for inning in innings:
 
     team = inning['team']['shortName']
@@ -119,6 +119,7 @@ if __name__ == "__main__":
   team1Score=""
   team2Score=""
   j=0
+  print(scores)
   for i in scores: 
     if (j == 0): 
       team1 = i
@@ -135,4 +136,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2 + "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  # commit()
+  commit()
