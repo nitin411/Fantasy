@@ -8,6 +8,7 @@
     <script type="text/javascript" src="../../scoreboard.json"></script>
 
     <script type="text/javascript" src="../../data_files/teams_subs/subs_iiitd.json"></script>
+    <script type="text/javascript" src="../../data_files/teams_subs/subs_iiitd_2.json"></script>
 
 
     <script type="text/javascript" src="../../substitute_1.json"></script>
@@ -239,6 +240,18 @@
                   boldSpan.appendChild(document.createTextNode(playerName));
                   textLink.appendChild(boldSpan);
                   textLink.appendChild(document.createTextNode(text));
+                  dropdownDiv.appendChild(textLink);
+              }
+              
+              if (myTeams[a].badSubIn[b]) {
+                  var inIcon = document.createElement("img");
+                  inIcon.src = "../../assets/banner/Cross.svg";
+                  var boldSpan = document.createElement("b");
+                  var textLink = document.createElement("a");
+                  textLink.appendChild(inIcon);
+                  textLink.style.color = "#b2b2b2"
+                  boldSpan.appendChild(document.createTextNode(" Invalid Sub: " + myTeams[a].badSubOut[b] + "/" +  myTeams[a].badSubIn[b]));
+                  textLink.appendChild(boldSpan);
                   dropdownDiv.appendChild(textLink);
               }
 
