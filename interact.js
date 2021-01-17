@@ -5,7 +5,7 @@ var subs = JSON.parse(subs);
 
 var day1Snapshot = JSON.parse(data_day_1);
 var day2Snapshot = JSON.parse(data_day_2);
-// var day3Snapshot = JSON.parse(data_day_3);
+var day3Snapshot = JSON.parse(data_day_3);
 // var day4Snapshot = JSON.parse(data_day_4);
 
 var scores = [];
@@ -132,7 +132,7 @@ function getSnapshotFromDay(day) {
     return day1Snapshot
   } else if (day === 2) {
     return day2Snapshot
-  } else if (day === "3") {
+  } else if (day === 3) {
     return day3Snapshot
   } else if (day === "4") {
     return day4Snapshot
