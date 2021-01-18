@@ -27,7 +27,7 @@ if __name__ == "__main__":
     subIn=""
     subOut=""
     subDay=4
-    if index==1000:
+    if index==2:
       break
     else:
       print("index", index)
