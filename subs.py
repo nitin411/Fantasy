@@ -26,8 +26,8 @@ if __name__ == "__main__":
     teamName=""
     subIn=""
     subOut=""
-    subDay=3
-    if index==3:
+    subDay=4
+    if index==1000:
       break
     else:
       print("index", index)
@@ -43,7 +43,7 @@ if __name__ == "__main__":
         if columnData == "Sub out":
           subOut = columnName.split(' ')[2][:-1]
       subs.append(teams(teamName, playerName, subIn, subOut, subDay))
-  with open("./data_files/teams_subs/subs_4v4_2.json", "w") as file1:
+  with open("./data_files/teams_subs/subs_4v4_2_day4.json", "w") as file1:
     file1.write("subs = '")
     json_string = json.dumps([ob.__dict__ for ob in subs])
     file1.write(json_string)

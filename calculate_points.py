@@ -77,7 +77,7 @@ if __name__ == "__main__":
       "bonus": 0
     }
   how_out = []
-  scores = {'IND' : '0'}
+  scores = {}
   for inning in innings:
 
     team = inning['team']['shortName']
