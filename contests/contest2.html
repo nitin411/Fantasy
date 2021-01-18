@@ -150,7 +150,7 @@
               td3.setAttributeNode(attDataLabel);
               td3.appendChild(document.createTextNode(myTeams[a].players[b]));
               var boldSpan = document.createElement("b");
-              boldSpan.appendChild(document.createTextNode(" (" + myTeams[a].scores.scores[b] + ")"));
+              boldSpan.appendChild(document.createTextNode(" (" + [myTeams[a].scores.scores[b] + myTeams[a].scores.bonuses[b]] + ")"));
               td3.appendChild(boldSpan);
               tr.appendChild(td3);
 
