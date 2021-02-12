@@ -4,3 +4,5 @@ data_files/MegaContest.xlsx
 data_files/Subs.xlsx
 data_files/MegaContestFourVFour.xlsx
 data_files/~$Subs.xlsx
+.idea/
+venv/
