@@ -2,6 +2,14 @@ import requests
 import json
 import subprocess
 
+players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Cheteshwar Pujara',
+           'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant',
+           'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'KL Rahul', 'Hardik Pandya', 'Moeen Ali',
+           'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
+           'Dom Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
+           'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem']
+
+
 def run(*args):
   return subprocess.check_call(['git'] + list(args))
 
@@ -47,6 +55,14 @@ def calc_bowler_score(data):
       score += 10
   return (score, bonus)
 
+
+def get_full_name(nick_name):
+  for player in players:
+    player_lower_case = player.lower()
+    if nick_name == player_lower_case.split(' ')[1]:
+      return player_lower_case
+
+
 def parse_how_out(how_out):
   for data in how_out:
     score = 5
@@ -60,6 +76,7 @@ def parse_how_out(how_out):
     elif data[0: 2] == 'st':
       player = data[4:].split(' ')[0]
     player = player.lower()
+    player = get_full_name(player)
     if player != "" and player in points:
       points[player]["score"] = points[player]["score"] + score
 
@@ -69,7 +86,6 @@ if __name__ == "__main__":
  # commit()
   data=fetch()
   innings = data['fullScorecard']['innings']
-  players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Cheteshwar Pujara', 'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant', 'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'KL Rahul', 'Hardik Pandya', 'Moeen Ali', 'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns', 'Dom Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha', 'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem']
   points = {}
   for player in players:
     points[player.lower()] = {
