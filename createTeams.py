@@ -74,7 +74,7 @@ if __name__ == "__main__":
       captain2 = row['Captain'].strip().lower()
       viceCaptain2 = row['Vice Captain'].strip().lower()
       teamNameToFullTeamDict[teamName].setPlayer2(playerName2, goldPlayers2 + silverPlayers2 + bronzePlayers2, captain2, viceCaptain2)
-  with open("./data_files/teams/teams1.json", "w") as file1:
+  with open("./data_files/teams/teams.json", "w") as file1:
     file1.write("teams = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")
