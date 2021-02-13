@@ -192,7 +192,6 @@ function scorePerTeam(team) {
           scores[j] += snapshot[players[j][i].toLowerCase()]["score"]*multiplier
           bonuses[j] += snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier
         } else {
-          console.log(players[j][i])
           team["playerPoints"][j][players[j][i].toLowerCase()] = [pointsTable[players[j][i].toLowerCase()]["score"]*multiplier + pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier]
           scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]*multiplier
           bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier
