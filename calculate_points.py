@@ -69,7 +69,7 @@ if __name__ == "__main__":
  # commit()
   data=fetch()
   innings = data['fullScorecard']['innings']
-  players = ['Agarwal', 'Paine', 'Lyon', 'Sharma', 'Saha', 'Hazlewood', 'Jadeja', 'Cummins', 'Neser', 'Saini', 'Smith', 'Abbott', 'Green', 'Thakur', 'Siraj', 'Pujara', 'Pucovski', 'Warner', 'Gill', 'Natarajan', 'Head', 'Vihari', 'Starc', 'Henriques', 'Pant', 'Shaw', 'Labuschagne', 'Bumrah', 'Ashwin', 'Pattinson', 'Rahane', 'Wade', 'Swepson', 'Yadav', 'Rahul', 'Sundar', 'Harris']
+  players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Cheteshwar Pujara', 'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant', 'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'KL Rahul', 'Hardik Pandya', 'Moeen Ali', 'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns', 'Dom Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha', 'Shardul Thakur', 'Zak Crawley', 'Ollie Pope']
   points = {}
   for player in players:
     points[player.lower()] = {
@@ -92,14 +92,14 @@ if __name__ == "__main__":
       else:
         scores[team]=inning['run'] + "/" + inning['wicket']
     for batsman in inning['batsmen']:
-      player = batsman['name'].split(" ")[-1].lower()
+      player = batsman['name'].lower()
       score = calc_batsman_score(batsman)
       print(score)
       points[player]["score"] = points[player]["score"] + score[0]
       points[player]["bonus"] = points[player]["bonus"] + score[1]
       how_out.append(batsman['howOut'])
     for bowler in inning['bowlers']:
-      player = bowler['name'].split(" ")[-1].lower()
+      player = bowler['name'].lower()
       score = calc_bowler_score(bowler)
       print(score)
       if player in points:
@@ -118,6 +118,8 @@ if __name__ == "__main__":
   
   team1Score=""
   team2Score=""
+  team1="IND"
+  team2="ENG"
   j=0
   print(scores)
   for i in scores: 
