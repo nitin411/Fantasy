@@ -1,5 +1,5 @@
 from shutil import copyfile
-day = "4"
+day = "1"
 src = "points.json"
 dst = "substitute_"+day+".json"
 copyfile(src, dst)

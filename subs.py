@@ -26,9 +26,10 @@ if __name__ == "__main__":
     teamName=""
     subIn=""
     subOut=""
-    subDay=4
+    subDay=1
     if index==2:
-      break
+      # break
+      print(index)
     else:
       print("index", index)
       for (columnName, columnData) in row.iteritems():
@@ -39,11 +40,11 @@ if __name__ == "__main__":
         if columnName=="Team Name":
           teamName = columnData.lower()
         if columnData == "Sub in":
-          subIn = columnName.split(' ')[2][:-1]
+          subIn = columnName.split('[')[1][:-1]
         if columnData == "Sub out":
-          subOut = columnName.split(' ')[2][:-1]
+          subOut = columnName.split('[')[1][:-1]
       subs.append(teams(teamName, playerName, subIn, subOut, subDay))
-  with open("./data_files/teams_subs/subs_4v4_2_day4.json", "w") as file1:
+  with open("./data_files/teams_subs/subs_iiitd.json", "w") as file1:
     file1.write("subs = '")
     json_string = json.dumps([ob.__dict__ for ob in subs])
     file1.write(json_string)
