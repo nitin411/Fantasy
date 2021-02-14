@@ -6,7 +6,7 @@ players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Ja
            'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant',
            'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'KL Rahul', 'Hardik Pandya', 'Moeen Ali',
            'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
-           'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
+           'Dom Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
            'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem']
 
 
