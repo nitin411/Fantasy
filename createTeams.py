@@ -47,7 +47,7 @@ def writeTeams(teamNameToFullTeamDict, file1):
   file1.write(json_string)
 
 if __name__ == "__main__":
-  data = pd.read_excel("./data_files/MegaContestiiitd.xlsx")
+  data = pd.read_excel("./data_files/MegaContest.xlsx")
   dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain'])
   
   teamNameToFullTeamDict = {}
