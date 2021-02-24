@@ -58,11 +58,11 @@ if __name__ == "__main__":
     if(row['Team Name'].strip().lower() not in teamNameToFullTeamDict):
       teamName = row['Team Name'].strip().lower()
       playerName = row['Full Name']
+      print(playerName)
       goldPlayers = getPlayersWithLastNamesAndLowerCase(row['Gold Players'])
       silverPlayers = getPlayersWithLastNamesAndLowerCase(row['Silver Players'])
       bronzePlayers = getPlayersWithLastNamesAndLowerCase(row['Bronze Players'])
       captain = row['Captain'].strip().lower()
-      print(playerName)
       viceCaptain = row['Vice Captain'].strip().lower()
       teamNameToFullTeamDict[teamName] = teams(teamName, playerName, goldPlayers + silverPlayers + bronzePlayers, captain, viceCaptain)
     else:
