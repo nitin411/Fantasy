@@ -149,7 +149,7 @@ if __name__ == "__main__":
 
   with open("scoreboard.json", "w") as file:
     file.write("scoreboard = '")
-    file.write("{\"match\": 3,")
+    file.write("{\"match\": 4,")
     file.write("\"location\":\"Gujarat\",")
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2+ "\"," + "\"score\": \"" + team2Score + "\"}],")
