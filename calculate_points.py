@@ -5,7 +5,7 @@ import subprocess
 players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Cheteshwar Pujara',
            'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant',
            'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'KL Rahul', 'Hardik Pandya', 'Moeen Ali',
-           'Chris Woakes', 'Dominic Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
+           'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
            'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
            'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', 'Umesh Yadav']
 
@@ -22,7 +22,7 @@ def commit():
   except Exception as e:
     print("Exception")
 def  fetch():
-  url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2730&matchid=49840"
+  url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2730&matchid=49841"
   payload = {}
   headers = {
     'x-rapidapi-key': 'dd8d46530cmsh63fc0c06dd092f1p1ca8a6jsn143ccf9a171f',
