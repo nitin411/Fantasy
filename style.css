@@ -247,7 +247,7 @@ body{
 
 @media(min-width: 800px) {
   .banner {
-    height: 300px;
+    height: 350px;
     padding-top: 20px;
   }
 }
@@ -311,6 +311,30 @@ b {
   display: block;
   margin: 0 auto;
 }
+
+.button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4caf50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
 
 .form-check-container {
   padding: 50px;
