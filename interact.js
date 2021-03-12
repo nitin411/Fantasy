@@ -34,6 +34,9 @@ var scoreboard = JSON.parse(scoreboard);
 getSubs()
 
 function executeLogic(subs) {
+  if (!subs) {
+    subs = []
+  }
   var day1Snapshot = JSON.parse(data_day_1);
   var day2Snapshot = JSON.parse(data_day_2);
   var day3Snapshot = JSON.parse(data_day_3);
@@ -170,8 +173,6 @@ function executeLogic(subs) {
 
       cardBody.appendChild(containerDiv);
     }
-
-
 
 
 

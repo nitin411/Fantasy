@@ -7,9 +7,6 @@
     <script type="text/javascript" src="../../data_files/teams/teams1.json"></script>
     <script type="text/javascript" src="../../scoreboard.json"></script>
 
-    <script type="text/javascript" src="../../data_files/teams_subs/subs_iiitd.json"></script>
-
-
     <script type="text/javascript" src="../../substitute_1.json"></script>
     <script type="text/javascript" src="../../substitute_2.json"></script>
     <script type="text/javascript" src="../../substitute_3.json"></script>
@@ -59,7 +56,7 @@
   <div class="banner">
     <div class="card col-12 col-md-4 offset-md-4 hidden-card">
       <div class="card-body card-body2">
-          <img src="assets/banner/Mask Group 5 (1)/Mask Group 8@3x.png">
+          <img src="../../assets/banner/Mask Group 5 (1)/Mask Group 8@3x.png">
         </div>
     </div>
   <div class="card col-12 col-md-4 offset-md-4">
@@ -71,40 +68,7 @@
               document.write('<p class="float-left match-day">'+scoreboard.match+'th Test Match, '+scoreboard.location+'</p>')
             </script>
           </div>
-        </div>
-            <script>
-              var cardBody = document.getElementById("card-body");
-              for (var a = 0; a < scoreboard.scoreBreakUp.length; a++) {
-                var containerDiv = document.createElement("div");
-                containerDiv.classList=["row padding-10"];
-
-                var containerColLeft = document.createElement("div");
-                containerColLeft.className = "col-6";
-
-                var image = document.createElement("img");
-                image.src="../../assets/"+scoreboard.scoreBreakUp[a].batting+"_flag.png";
-                image.className="float-left";
-                containerColLeft.appendChild(image);
-
-                var teamName = document.createElement("span");
-                teamName.className = "padding-10";
-                teamName.appendChild(document.createTextNode(scoreboard.scoreBreakUp[a].batting));
-                containerColLeft.appendChild(teamName);
-
-                var containerColRight = document.createElement("div");
-                containerColRight.className = "col-6";
-
-                var score = document.createElement("span");
-                score.className = "float-right";
-                score.appendChild(document.createTextNode(scoreboard.scoreBreakUp[a].score));
-                containerColRight.appendChild(score);
-                
-                containerDiv.appendChild(containerColLeft);
-                containerDiv.appendChild(containerColRight);
-
-                cardBody.appendChild(containerDiv);
-              }
-            </script>   
+        </div> 
         <div class="row padding-10">
           <div class="col-12">
             <script>
@@ -125,155 +89,7 @@
        <th>TotalPoints</th>
      </thead>
      <tbody>
-       
-      <script language="javascript" type="text/javascript">
-
-          var body = document.getElementsByTagName('tbody')[0];
-          console.log(myTeams);
-          for (var a = 0; a < myTeams.length; a++) {
-            var teamName = myTeams[a].teamName;
-            var tr = document.createElement('tr');
-
-            // Rank Cell
-            var td1 = document.createElement('td');
-            var attDataLabel = document.createAttribute("data-label");
-            attDataLabel.value = "Rank";
-            td1.setAttributeNode(attDataLabel);
-            td1.appendChild(document.createTextNode(a+1));
-            tr.appendChild(td1);
-
-            // Team Name Cell
-            var td2 = document.createElement('td');
-            var attDataLabel = document.createAttribute("data-label");
-            attDataLabel.value = "Team Name";
-            td2.setAttributeNode(attDataLabel);
-            td2.appendChild(document.createTextNode(myTeams[a].teamName));
-            tr.appendChild(td2);
-
-            for (var b=0; b<2; b++) {
-
-              var td3 = document.createElement('td');
-              var attDataLabel = document.createAttribute("data-label");
-              attDataLabel.value = "Player " + (b+1);
-              td3.setAttributeNode(attDataLabel);
-              td3.appendChild(document.createTextNode(myTeams[a].players[b]));
-              var boldSpan = document.createElement("b");
-              boldSpan.appendChild(document.createTextNode(" (" + [myTeams[a].scores.scores[b] + myTeams[a].scores.bonuses[b]] + ")"));
-              td3.appendChild(boldSpan);
-              tr.appendChild(td3);
-
-              var button = document.createElement('i');
-              var dropdownDiv = document.createElement("div");
-              button.className = "dropbtn fa fa-eye " + a + " " + b;
-              button.id = a + " " + b;
-              dropdownDiv.id = "myDropdown" + a + "" + b;
-              dropdownDiv.className = "dropdown-content"
-              var attDataLabel2 = document.createAttribute("aria-hidden");
-              attDataLabel2.value = "true";
-              button.setAttributeNode(attDataLabel2);
-              td3.appendChild(button);
-              button.onclick = function(a){
-                var teamIndex = a.target.id.split(" ")[0];
-                var playerIndex = a.target.id.split(" ")[1];
-                document.getElementById("myDropdown"+teamIndex+""+playerIndex).classList.toggle("show");
-              };
-              td3.appendChild(dropdownDiv);
-              var subbed = false;
-              for (var j=0; j<myTeams[a].teams[b].length; j++) {
-                var textLink = document.createElement("a");
-                var isCaptian = (myTeams[a].teamCaptains[b] === myTeams[a].teams[b][j]);
-                var isViceCaptian = (myTeams[a].teamViceCaptains[b] === myTeams[a].teams[b][j]);
-                var playerName = myTeams[a].teams[b][j];
-                var points = pointsTable[myTeams[a].teams[b][j]].score + pointsTable[myTeams[a].teams[b][j]].bonus;
-                var isPlayerSubOut = (myTeams[a].subs && myTeams[a].subs[b] && myTeams[a].subs[b]["subOut"]) && (myTeams[a].subs[b]["subOut"].toLowerCase() === myTeams[a].teams[b][j].toLowerCase());
-                var subOutScore;
-                var boldText = "";
-                var multiplier = 1;
-
-                if(isCaptian) {
-                  boldText = "(C) ";
-                  multiplier = 2;
-                } else if(isViceCaptian) {
-                  boldText = "(VC) ";
-                  multiplier = 1.5;
-                }  
-                
-                boldText = boldText + "" + playerName;
-                text = " - " + (isPlayerSubOut? myTeams[a]["playerPoints"][b][myTeams[a].teams[b][j]] + "/":"") + points*multiplier + " pts.";
-                if (isPlayerSubOut){
-                  subbed = true;
-                  var outIcon = document.createElement("img");
-                  outIcon.src = "../../assets/banner/Out.svg";
-
-                  textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
-                  textLink.appendChild(outIcon);
-                  textLink.appendChild(document.createTextNode(") "));
-                }
-                  
-
-                if (boldText) {
-                  var boldSpan = document.createElement("b");
-                  boldSpan.appendChild(document.createTextNode(boldText));
-                  textLink.appendChild(boldSpan);
-                }
-                textLink.appendChild(document.createTextNode(text));
-                dropdownDiv.appendChild(textLink);
-              }
-
-
-              if (subbed) {
-                  var playerName = myTeams[a].subs[b]["subIn"].toLowerCase();
-                  var points = myTeams[a]["playerPoints"][b][playerName];
-                  var totalPoints = pointsTable[playerName].score + pointsTable[playerName].bonus;
-                  var boldText = text;
-
-                  var inIcon = document.createElement("img");
-                  inIcon.src = "../../assets/banner/In.svg";
-
-
-                  text = " - " + (subbed? points + "/":"") + totalPoints + " pts.";
-                  var textLink = document.createElement("a");
-                  var boldSpan = document.createElement("b");
-                  textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
-                  textLink.appendChild(inIcon);
-                  textLink.appendChild(document.createTextNode(") "));
-                  boldSpan.appendChild(document.createTextNode(playerName));
-                  textLink.appendChild(boldSpan);
-                  textLink.appendChild(document.createTextNode(text));
-                  dropdownDiv.appendChild(textLink);
-              }
-              
-              if (myTeams[a].badSubIn[b]) {
-                  var inIcon = document.createElement("img");
-                  inIcon.src = "../../assets/banner/Cross.svg";
-                  var boldSpan = document.createElement("b");
-                  var textLink = document.createElement("a");
-                  textLink.appendChild(inIcon);
-                  textLink.style.color = "#b2b2b2"
-                  boldSpan.appendChild(document.createTextNode(" Invalid Sub: " + myTeams[a].badSubOut[b] + "/" +  myTeams[a].badSubIn[b]));
-                  textLink.appendChild(boldSpan);
-                  dropdownDiv.appendChild(textLink);
-              }
-
-              
-            }
-            
-
-            
-
-            var td9 = document.createElement('td');
-            var attDataLabel = document.createAttribute("data-label");
-            attDataLabel.value = "Total Score";
-            td9.setAttributeNode(attDataLabel);
-            var boldSpan2 = document.createElement("b");
-            boldSpan2.appendChild(document.createTextNode(myTeams[a].scores.totalScore));
-            td9.appendChild(boldSpan2);
-            tr.appendChild(td9);
-            
-            body.appendChild(tr);
-          }
-
-        </script>
+      
      </tbody>
    </table>
 </body>
