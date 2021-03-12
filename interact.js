@@ -151,7 +151,7 @@ function executeLogic(subs) {
       containerColLeft.className = "col-6";
 
       var image = document.createElement("img");
-      image.src="assets/"+scoreboard.scoreBreakUp[a].batting+"_flag.png";
+      image.src="/assets/"+scoreboard.scoreBreakUp[a].batting+"_flag.png";
       image.className="float-left";
       containerColLeft.appendChild(image);
 
