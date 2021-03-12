@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fantasy league</title>
+
+    <script type="text/javascript" src="../points.json"></script>
+    <script type="text/javascript" src="../data_files/teams/teams.json"></script>
+    <script type="text/javascript" src="../scoreboard.json"></script>
+    <script type="text/javascript" src="../data_files/teams_subs/subs.json"></script>
+    <script type="text/javascript" src="../player_tiers.json"></script>
+
+    <link rel="icon" type="image/png" href="trophy.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <script type="text/javascript" src="../substitute_1.json"></script>
+    <script type="text/javascript" src="../substitute_2.json"></script>
+    <script type="text/javascript" src="../substitute_3.json"></script>
+    <script type="text/javascript" src="../substitute_4.json"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- <link href="/assets/css/material-kit.css?v=2.0.4" rel="stylesheet" /> -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script src="../interact.js"></script>
+
+    <script type="text/javascript" src="../data_files/teams/teams1.json"></script>
+    <script type="text/javascript" src="../data_files/teams/teams.json"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="../style.css"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQL1CWJ9V0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YQL1CWJ9V0');
+    </script>
+  
+</head>
+<body>
+
+  <div class="banner">
+    <div class="card col-12 col-md-4 offset-md-4 hidden-card">
+      <div class="card-body card-body2">
+          <img src="../assets/banner/Mask Group 5 (1)/Mask Group 8@3x.png">
+        </div>
+    </div>
+  <div class="card col-12 col-md-4 offset-md-4">
+    <div class="card-body">
+      <div class="card-text" id="card-body">
+        <div class="row padding-10">
+          <div class="col-6">
+            <script>
+              document.write('<p class="float-left match-day">'+scoreboard.match+'th Test Match, '+scoreboard.location+'</p>')
+            </script>
+          </div>
+        </div>
+            <script>
+              var cardBody = document.getElementById("card-body");
+              for (var a = 0; a < scoreboard.scoreBreakUp.length; a++) {
+                var containerDiv = document.createElement("div");
+                containerDiv.classList=["row padding-10"];
+
+                var containerColLeft = document.createElement("div");
+                containerColLeft.className = "col-6";
+
+                var image = document.createElement("img");
+                image.src="../assets/"+scoreboard.scoreBreakUp[a].batting+"_flag.png";
+                image.className="float-left";
+                containerColLeft.appendChild(image);
+
+                var teamName = document.createElement("span");
+                teamName.className = "padding-10";
+                teamName.appendChild(document.createTextNode(scoreboard.scoreBreakUp[a].batting));
+                containerColLeft.appendChild(teamName);
+
+                var containerColRight = document.createElement("div");
+                containerColRight.className = "col-6";
+
+                var score = document.createElement("span");
+                score.className = "float-right";
+                score.appendChild(document.createTextNode(scoreboard.scoreBreakUp[a].score));
+                containerColRight.appendChild(score);
+                
+                containerDiv.appendChild(containerColLeft);
+                containerDiv.appendChild(containerColRight);
+
+                cardBody.appendChild(containerDiv);
+              }
+            </script>   
+        <div class="row padding-10">
+          <div class="col-12">
+            <script>
+              document.write('<p class="float-left match-day no-margin"> Last updated over: '+scoreboard.overs+'</p>')
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-6 offset-md-3 col-sm-12">
+    <h4 style="text-align: center;">Rules of Substitutions</h4>
+
+    <ul>
+      <li>The swap of players has to be amongst the same category.</li>
+      <li>Substituted players will not get bonus points. Bonus points include +1x of captain, +0.5x of VC, century, half-century, 4 wicket haul, and 5 wicket haul points. If a user substitutes his captain or vice-captain, he will get normal points and not 2x or 1.5x points</li>
+      <li>You can edit your substitution before the first ball of the following day</li>
+      <li>Each player can make only one substitution per match at the end of any day (1-4).</li>
+      <li>This substitution is optional. Even one teammate from a team can do it independently if the other teammate doesn't want to.</li>
+    </ul>
+  </div>
+
+</div>
+
+<br>
+<h6 id="countdown" style="color: red; text-align: center;"></h6>
+<hr>
+
+<div class="row">
+<div class="col-md-4 col-sm-12 padding-10">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Please choose the contest type</label>
+        <select class="custom-select" id="inputGroupSelect01">
+            <option >Choose contest Name</option>
+            <option value="IIITD">IIITD</option>
+            <option value="MEGA">MEGA</option>
+          </select>
+    </div>        
+    <div class="form-group">
+      <label for="teamName">Team Name</label>
+      <input type="text" class="form-control" id="teamName" aria-describedby="emailHelp" placeholder="Enter team name">
+      <small id="emailHelp" class="form-text text-muted">Please input the team you used while signing up for the contest.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Player Name</label>
+        <input type="text" class="form-control" id="playerName" aria-describedby="emailHelp" placeholder="Enter player name">
+        <small id="emailHelp" class="form-text text-muted">Please input the player name you used while signing up for the contest.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Secret Key</label>
+        <input type="password" class="form-control" id="secretKey" aria-describedby="emailHelp" placeholder="Enter secret key">
+        <small id="emailHelp" class="form-text text-muted">Please input the secret key you used while signing up for the contest.</small>
+      </div>
+    <button id="authenticate-user" class="btn btn-primary btn-center">Submit</button>
+</div>
+
+<div class="team_selector col-md-4 col-sm-12" id = "team_selector"></div>
+<div class="team_selector_sub_in col-md-4 col-sm-12" id = "team_selector_sub_in"></div>
+
+
+</div>
+
+<script src="../substitute_automation.js"></script>
+
+</body>
+
+
+</html>

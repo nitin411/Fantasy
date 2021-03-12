@@ -307,3 +307,33 @@ b {
   font-weight: 900 !important;
 }
 
+.btn-center {
+  display: block;
+  margin: 0 auto;
+}
+
+.form-check-container {
+  padding: 50px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+}
+
+@media(max-width: 760px) {
+  .form-check-container {
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 40px;
+  }
+}
+
+@media(max-width: 760px) {
+  .display-hr {
+    visibility:visible;
+  }
+}
+
+@media(min-width: 760px) {
+  .display-hr {
+    visibility: hidden;
+  }
+}
