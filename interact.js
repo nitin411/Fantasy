@@ -386,13 +386,14 @@ function executeLogic(subs) {
         for(var i=0; i < players[j].length; i++ ) {
 
           var multiplier = 1;
-          var isSubOut = team.subs[j] && (team.subs[j]["subOut"] === players[j][i])
+          var isSubOut = team.subs[j] && team.subs[j]["subOut"] && (team.subs[j]["subOut"] === players[j][i])
           var isCaptain = teamCaptains[j] === players[j][i]
           var isViceCaptain = teamViceCaptains[j] == players[j][i]
 
           if (isCaptain) multiplier = 2;
           if (isViceCaptain) multiplier = 1.5;
 
+          console.log(teams)
           if (isSubOut) {
             subbed = true;
             var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
@@ -400,6 +401,7 @@ function executeLogic(subs) {
             scores[j] += snapshot[players[j][i].toLowerCase()]["score"]*multiplier
             bonuses[j] += snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier
           } else {
+            console.log(players[j][i].toLowerCase())
             team["playerPoints"][j][players[j][i].toLowerCase()] = [pointsTable[players[j][i].toLowerCase()]["score"]*multiplier + pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier]
             scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]*multiplier
             bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier

@@ -4,10 +4,12 @@ import subprocess
 
 players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Cheteshwar Pujara',
            'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant',
-           'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'KL Rahul', 'Hardik Pandya', 'Moeen Ali',
+           'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'lokesh Rahul', 'Hardik Pandya', 'Moeen Ali',
            'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
            'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
-           'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', 'Umesh Yadav']
+           'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', 'Umesh Yadav', "Yuzvendra Chahal"
+           , 'Sam Curran', 'Bhuvneshwar Kumar', 'Chris Jordan', 'shikhar dhawan', 'shreyas iyer', 'adil rashid', 'dawid malan', 'jos buttler', 'hardik pandya'
+           , 'rishab pant', 'suryakumar yadav', 't natarajan', 'jason roy', 'eoin morgan', 'tom curran', 'ishan kishan', 'liam livingstone']
 
 
 def run(*args):
@@ -125,7 +127,12 @@ if __name__ == "__main__":
         points[player]["score"] = score
       print("Bowling after " + str(player) + str(points[player]))
 
+  
   parse_how_out(how_out)
+
+  points["k l rahul"] = points["lokesh rahul"]
+  points["rishab pant"] = points["rishabh pant"]
+
   points = json.dumps(points)
   with open("points.json", "w") as file1:
     file1.write("data = '")
@@ -134,8 +141,8 @@ if __name__ == "__main__":
   
   team1Score="0/0"
   team2Score="0/0"
-  team1="ENG"
-  team2="IND"
+  team1="IND"
+  team2="ENG"
   j=0
   print(scores)
   for i in scores: 
@@ -147,6 +154,7 @@ if __name__ == "__main__":
       team2Score = scores[i]      
     j = j + 1
 
+  
   with open("scoreboard.json", "w") as file:
     file.write("scoreboard = '")
     file.write("{\"match\": 1,")
@@ -154,4 +162,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2+ "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  commit()
+  # commit()
