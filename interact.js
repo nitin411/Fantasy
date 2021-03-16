@@ -7,9 +7,9 @@ if (window.location.href.includes("iiitd")) {
 }
 
 function reqListener() {
-  // const substitutes = JSON.parse(this.responseText);
-  // const subs = substitutes.Substitutes
-  executeLogic(null)
+  const substitutes = JSON.parse(this.responseText);
+  const subs = substitutes.Substitutes
+  executeLogic(subs)
 }
 
 var getSubs = () => {
@@ -19,8 +19,7 @@ var getSubs = () => {
   }else {
     contest = "IIITD"
   }
-  var matchName = scoreboard.scoreBreakUp[0].batting + "vs" + scoreboard.scoreBreakUp[1].batting + "_" + scoreboard.match + "_" + contest;
-  const url = 'https://clash11.herokuapp.com/getallsubs?contestName=' + matchName;
+  const url = 'https://clash11.herokuapp.com/getallsubs?contestName=' + contest;
 
   var oReq = new XMLHttpRequest();
   oReq.open('GET', url, true);
@@ -100,7 +99,6 @@ function executeLogic(subs) {
         if (subs[j].teamName.toLowerCase() === teamName.toLowerCase()) {
           for (var k=0; k<players; k++){
             if (myTeams[i].players[k].toLowerCase().includes(subs[j].playerName.toLowerCase())) {
-              console.log(subs);
               subs[j]["subIn"] = subs[j]["subIn"].toLowerCase()
               subs[j]["subOut"] = subs[j]["subOut"].toLowerCase()
               if (!myTeams[i].teams[k].includes(subs[j]["subIn"]) && myTeams[i].teams[k].includes(subs[j]["subOut"])) {
@@ -136,7 +134,6 @@ function executeLogic(subs) {
   });
 
 
-  console.log(window.location.href);
   if (window.location.href.indexOf("subs") < 0) {
     renderHtml();
   }
@@ -392,16 +389,19 @@ function executeLogic(subs) {
 
           if (isCaptain) multiplier = 2;
           if (isViceCaptain) multiplier = 1.5;
-
-          console.log(teams)
           if (isSubOut) {
             subbed = true;
             var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+            if (snapshot[players[j][i].toLowerCase()] == null) {
+              snapshot[players[j][i].toLowerCase()] = {
+                "score": pointsTable[players[j][i].toLowerCase()]["score"],
+                "bonus": pointsTable[players[j][i].toLowerCase()]["bonus"]
+              }
+            }
             team["playerPoints"][j][players[j][i].toLowerCase()] = [snapshot[players[j][i].toLowerCase()]["score"]*multiplier + snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier]
             scores[j] += snapshot[players[j][i].toLowerCase()]["score"]*multiplier
             bonuses[j] += snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier
           } else {
-            console.log(players[j][i].toLowerCase())
             team["playerPoints"][j][players[j][i].toLowerCase()] = [pointsTable[players[j][i].toLowerCase()]["score"]*multiplier + pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier]
             scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]*multiplier
             bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier
@@ -411,10 +411,13 @@ function executeLogic(subs) {
 
         if (subbed) {
           var playerName = team.subs[j]["subIn"].toLowerCase();
-          if (players[j].includes(playerName)) {
-            console.log(team)
-          }
           var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+          if (snapshot[playerName] == null) {
+            snapshot[playerName] = {
+              "score": pointsTable[playerName]["score"],
+              "bonus": pointsTable[playerName]["bonus"]
+            }
+          }
           team["playerPoints"][j][playerName] = [pointsTable[playerName]["score"] - snapshot[playerName]["score"]]
           scores[j] += pointsTable[playerName]["score"] - snapshot[playerName]["score"]
         } 

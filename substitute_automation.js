@@ -16,22 +16,18 @@ document.getElementById("authenticate-user").onclick = function() {
     } else {
         teams = mega_teams
     }
-    var matchName = scoreboard.scoreBreakUp[0].batting + "vs" + scoreboard.scoreBreakUp[1].batting + "_" + scoreboard.match + "_" + contestName;
     
     for (team in teams) {
         if (teams[team].teamName.toLowerCase() === teamName.toLowerCase()) {
             var currentTeam = teams[team];
-            console.log(currentTeam)
             if (currentTeam.player1.toLowerCase() === playerName.toLowerCase()) {
                 var captain = currentTeam.team1Captain
                 var viceCaptain = currentTeam.team1ViceCaptain
                 currentTeam = currentTeam.team1
-                console.log(captain);
             } else if (currentTeam.player2.toLowerCase() === playerName.toLowerCase()) {
                 var captain = currentTeam.team2Captain
                 var viceCaptain = currentTeam.team2ViceCaptain
                 currentTeam = currentTeam.team2
-                console.log(captain);
             } else {
                 currentTeam = [];
             }
@@ -67,7 +63,6 @@ document.getElementById("authenticate-user").onclick = function() {
 
         var label = document.createElement("label");
         label.classList = "form-check-label"
-        console.log(captain);
         var appendedText = "";
         if (currentTeam[playerIndex] === captain ) {
             appendedText = " (C)"
@@ -156,7 +151,7 @@ document.getElementById("authenticate-user").onclick = function() {
             data.append('subIn', subIn);
             data.append('subOut', subOut);
             data.append('subDay', '1');
-            data.append("contestName", matchName);
+            data.append("contestName", contestName);
             data.append("secret", secretKey);
 
 
