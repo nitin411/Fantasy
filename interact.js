@@ -259,7 +259,7 @@ function executeLogic(subs) {
           if (isPlayerSubOut){
             subbed = true;
             var outIcon = document.createElement("img");
-            outIcon.src = "../../assets/banner/Out.svg";
+            outIcon.src = "/Fantasy/assets/banner/Out.svg";
 
             // textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
             textLink.appendChild(outIcon);
@@ -284,7 +284,7 @@ function executeLogic(subs) {
             var boldText = text;
 
             var inIcon = document.createElement("img");
-            inIcon.src = "../../assets/banner/In.svg";
+            inIcon.src = "/Fantasy/assets/banner/In.svg";
 
 
             text = " - " + (subbed? points + "/":"") + totalPoints + " pts.";
