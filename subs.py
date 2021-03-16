@@ -17,7 +17,7 @@ class teams:
   	self.subDay = subDay
 
 if __name__ == "__main__":
-  data = pd.read_excel("./data_files/Subs.xlsx")
+  data = pd.read_excel("./data_files/Subs_iiitd.xlsx")
   dataFrame = pd.DataFrame(data)
   subs = []
   firstRow = ""
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     teamName=""
     subIn=""
     subOut=""
-    subDay=2
+    subDay=1
     if index==1000:
       break
       print(index)
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         if columnData == "Sub out":
           subOut = columnName.split('[')[1][:-1]
       subs.append(teams(teamName, playerName, subIn, subOut, subDay))
-  with open("./data_files/teams_subs/subs_iiitd2.json", "w") as file1:
+  with open("./data_files/teams_subs/subs_iiitd.json", "w") as file1:
     file1.write("subs = '")
     json_string = json.dumps([ob.__dict__ for ob in subs])
     file1.write(json_string)

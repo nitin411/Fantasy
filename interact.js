@@ -6,23 +6,33 @@ if (window.location.href.includes("iiitd")) {
   myTeams = JSON.parse(teams);
 }
 
-function reqListener() {
-  try{
-    const substitutes = JSON.parse(this.responseText);
-    const subs = substitutes.Substitutes
-    executeLogic(subs)
-  } catch(err) {
-    executeLogic(null)
-  }
+if(window.location.href.indexOf("iiitd") < 0) {
+  contest = "MEGA"
+}else {
+  contest = "IIITD"
 }
 
-var getSubs = () => {
-
-  if(window.location.href.indexOf("iiid") < 0) {
+function reqListener() {
+    
+  if(window.location.href.indexOf("iiitd") < 0) {
     contest = "MEGA"
   }else {
     contest = "IIITD"
   }
+  console.log(window.location.href.indexOf("iiitd"))
+  var substitutes
+    if (contest === "IIITD") {
+      substitutes = JSON.parse(subs_iiitd);
+    } else {
+      substitutes = JSON.parse(subs);
+    }
+    // const subs = substitutes.Substitutes
+    console.log(substitutes)
+    executeLogic(substitutes)
+}
+
+var getSubs = () => {
+
   const url = 'https://clash11.herokuapp.com/getallsubs?contestName=' + contest;
 
   var oReq = new XMLHttpRequest();
@@ -41,9 +51,6 @@ function executeLogic(subs) {
     subs = []
   }
   var day1Snapshot = JSON.parse(data_day_1);
-  var day2Snapshot = JSON.parse(data_day_2);
-  var day3Snapshot = JSON.parse(data_day_3);
-  var day4Snapshot = JSON.parse(data_day_4);
 
   var scores = [];
   var teams = [];
