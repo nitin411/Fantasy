@@ -46,19 +46,49 @@ def writeTeams(teamNameToFullTeamDict, file1):
   json_string = json.dumps([ob.__dict__ for ob in teamsList])
   file1.write(json_string)
 
+def set_teams_in_db(teams):
+  url = "https://clash11.herokuapp.com/setteams"
+  # teams = [
+  #   {
+  #     "playerName": "Paurush",
+  #     "teamName": "Dhakkadsssss",
+  #     "contestName": "mega",
+  #     "secret": "xd"
+  #   },
+  #   {
+  #     "playerName": "Paurush",
+  #     "teamName": "Dhakkadsssss",
+  #     "contestName": "iiitd",
+  #     "secret": "xd"
+  #   }
+  # ]
+  payload = {}
+  payload['teams'] = teams
+  print(payload)
+  headers = {
+    'Content-Type': 'application/json'
+  }
+
+  response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+
+  print(response.text)
+
 if __name__ == "__main__":
-  data = pd.read_excel("./data_files/MEGA.xlsx")
-  dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain'])
-  
+  data = pd.read_excel("data_files/IIITD.xlsx")
+  contestName = 'MEGA'
+  dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain', 'Password'])
+
   teamNameToFullTeamDict = {}
-  
+  teamsWithSecretList = []
   #Removing empty lines from files
   dataFrame.dropna(subset = ["Team Name"], inplace=True)
   for index, row in dataFrame.iterrows():
+    teamDataWithSecret = {}
     print(row)
     if(row['Team Name'].strip().lower() not in teamNameToFullTeamDict):
       teamName = row['Team Name'].strip().lower()
       playerName = row['Full Name']
+      secret = str(row['Password']).strip()
       print(playerName)
       goldPlayers = getPlayersWithLastNamesAndLowerCase(row['Gold Players'])
       silverPlayers = getPlayersWithLastNamesAndLowerCase(row['Silver Players'])
@@ -66,19 +96,33 @@ if __name__ == "__main__":
       captain = row['Captain'].strip().lower()
       viceCaptain = row['Vice Captain'].strip().lower()
       teamNameToFullTeamDict[teamName] = teams(teamName, playerName, goldPlayers + silverPlayers + bronzePlayers, captain, viceCaptain)
+      teamDataWithSecret['teamName'] = teamName
+      teamDataWithSecret['playerName'] = playerName
+      teamDataWithSecret['secret'] = secret
+      teamDataWithSecret['contestName'] = contestName
     else:
       teamName = row['Team Name'].strip().lower()
       playerName2 = row['Full Name']
+      secret2 = str(row['Password']).strip()
       goldPlayers2 = getPlayersWithLastNamesAndLowerCase(row['Gold Players'])
       silverPlayers2 = getPlayersWithLastNamesAndLowerCase(row['Silver Players'])
       bronzePlayers2 = getPlayersWithLastNamesAndLowerCase(row['Bronze Players'])
       captain2 = row['Captain'].strip().lower()
       viceCaptain2 = row['Vice Captain'].strip().lower()
       teamNameToFullTeamDict[teamName].setPlayer2(playerName2, goldPlayers2 + silverPlayers2 + bronzePlayers2, captain2, viceCaptain2)
+      teamDataWithSecret['teamName'] = teamName
+      teamDataWithSecret['playerName'] = playerName2
+      teamDataWithSecret['secret'] = secret2
+      teamDataWithSecret['contestName'] = contestName
+    print(teamDataWithSecret)
+    teamsWithSecretList.append(teamDataWithSecret)
+
   with open("./data_files/teams/teams.json", "w") as file1:
     file1.write("teams = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")
+  print(teamsWithSecretList)
+  set_teams_in_db(teamsWithSecretList)
   
 
   # teamObj = teams(row['Full Name'], )
