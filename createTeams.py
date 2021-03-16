@@ -117,8 +117,12 @@ if __name__ == "__main__":
     print(teamDataWithSecret)
     teamsWithSecretList.append(teamDataWithSecret)
 
+<<<<<<< Updated upstream
   print(teamNameToFullTeamDict.keys())
   with open("./data_files/teams/teams.json", "w") as file1:
+=======
+  with open("./data_files/teams/teams1.json", "w") as file1:
+>>>>>>> Stashed changes
     file1.write("teams = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")
