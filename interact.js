@@ -7,9 +7,13 @@ if (window.location.href.includes("iiitd")) {
 }
 
 function reqListener() {
-  const substitutes = JSON.parse(this.responseText);
-  const subs = substitutes.Substitutes
-  executeLogic(subs)
+  try{
+    const substitutes = JSON.parse(this.responseText);
+    const subs = substitutes.Substitutes
+    executeLogic(subs)
+  } catch(err) {
+    executeLogic(null)
+  }
 }
 
 var getSubs = () => {
