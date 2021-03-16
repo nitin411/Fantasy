@@ -250,9 +250,9 @@ function executeLogic(subs) {
             var outIcon = document.createElement("img");
             outIcon.src = "assets/banner/Out.svg";
 
-            textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
+            // textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
             textLink.appendChild(outIcon);
-            textLink.appendChild(document.createTextNode(") "));
+            textLink.appendChild(document.createTextNode(" "));
           }
             
 
@@ -279,9 +279,9 @@ function executeLogic(subs) {
             text = " - " + (subbed? points + "/":"") + totalPoints + " pts.";
             var textLink = document.createElement("a");
             var boldSpan = document.createElement("b");
-            textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
+            // textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
             textLink.appendChild(inIcon);
-            textLink.appendChild(document.createTextNode(") "));
+            textLink.appendChild(document.createTextNode(" "));
             boldSpan.appendChild(document.createTextNode(playerName));
             textLink.appendChild(boldSpan);
             textLink.appendChild(document.createTextNode(text));
