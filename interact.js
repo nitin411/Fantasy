@@ -423,6 +423,7 @@ function executeLogic(subs) {
         if (subbed) {
           var playerName = team.subs[j]["subIn"].toLowerCase();
           var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+          console.log(playerName)
           if (snapshot[playerName] == null) {
             snapshot[playerName] = {
               "score": pointsTable[playerName]["score"],
