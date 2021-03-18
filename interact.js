@@ -96,11 +96,12 @@ function executeLogic(subs) {
       myTeams[i].badSubOut = [null, null, null, null];
 
       for (var j=0; j< subs.length; j++) {
-        if (subs[j].teamName.toLowerCase() === teamName.toLowerCase()) {
+        console.log(subs[j])
+        if (subs[j].teamname.toLowerCase() === teamName.toLowerCase()) {
           for (var k=0; k<players; k++){
-            if (myTeams[i].players[k].toLowerCase().includes(subs[j].playerName.toLowerCase())) {
-              subs[j]["subIn"] = subs[j]["subIn"].toLowerCase()
-              subs[j]["subOut"] = subs[j]["subOut"].toLowerCase()
+            if (myTeams[i].players[k].toLowerCase().includes(subs[j].playername.toLowerCase())) {
+              subs[j]["subIn"] = subs[j]["subin"].toLowerCase()
+              subs[j]["subOut"] = subs[j]["subout"].toLowerCase()
               if (!myTeams[i].teams[k].includes(subs[j]["subIn"]) && myTeams[i].teams[k].includes(subs[j]["subOut"])) {
                 myTeams[i].subs[k] = subs[j]
                 myTeams[i].subs[k]["subIn"] = myTeams[i].subs[k]["subIn"].toLowerCase()
@@ -391,7 +392,7 @@ function executeLogic(subs) {
           if (isViceCaptain) multiplier = 1.5;
           if (isSubOut) {
             subbed = true;
-            var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+            var snapshot = getSnapshotFromDay(team.subs[j]["subday"]);
             if (snapshot[players[j][i].toLowerCase()] == null) {
               snapshot[players[j][i].toLowerCase()] = {
                 "score": pointsTable[players[j][i].toLowerCase()]["score"],
@@ -412,7 +413,7 @@ function executeLogic(subs) {
 
         if (subbed) {
           var playerName = team.subs[j]["subIn"].toLowerCase();
-          var snapshot = getSnapshotFromDay(team.subs[j]["subDay"]);
+          var snapshot = getSnapshotFromDay(team.subs[j]["subday"]);
           if (snapshot[playerName] == null) {
             snapshot[playerName] = {
               "score": pointsTable[playerName]["score"],
