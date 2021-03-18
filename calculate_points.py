@@ -9,7 +9,7 @@ players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Ja
            'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
            'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', 'Umesh Yadav', "Yuzvendra Chahal"
            , 'Sam Curran', 'Bhuvneshwar Kumar', 'Chris Jordan', 'shikhar dhawan', 'shreyas iyer', 'adil rashid', 'dawid malan', 'jos buttler', 'hardik pandya'
-           , 'suryakumar yadav', 't natarajan', 'jason roy', 'eoin morgan', 'tom curran', 'ishan kishan', 'liam livingstone']
+           , 'suryakumar yadav', 't natarajan', 'jason roy', 'eoin morgan', 'tom curran', 'ishan kishan', 'liam livingstone', 'Rahul Chahar']
 
 
 def run(*args):
