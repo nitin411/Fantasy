@@ -74,7 +74,7 @@ def set_teams_in_db(teams):
   print(response.text)
 
 if __name__ == "__main__":
-  data = pd.read_excel("data_files/MEGA2.xlsx")
+  data = pd.read_excel("data_files/IIITD.xlsx")
   contestName = 'MEGA'
   dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain', 'Password'])
 
@@ -85,8 +85,8 @@ if __name__ == "__main__":
   for index, row in dataFrame.iterrows():
     teamDataWithSecret = {}
     print(row)
-    if(row['Team Name'].strip().lower() not in teamNameToFullTeamDict):
-      teamName = row['Team Name'].strip().lower()
+    if(str(row['Team Name']).strip().lower() not in teamNameToFullTeamDict):
+      teamName = str(row['Team Name']).strip().lower()
       playerName = row['Full Name']
       secret = str(row['Password']).strip()
       print(playerName)
@@ -101,7 +101,7 @@ if __name__ == "__main__":
       teamDataWithSecret['secret'] = secret
       teamDataWithSecret['contestName'] = contestName
     else:
-      teamName = row['Team Name'].strip().lower()
+      teamName = str(row['Team Name']).strip().lower()
       playerName2 = row['Full Name']
       secret2 = str(row['Password']).strip()
       goldPlayers2 = getPlayersWithLastNamesAndLowerCase(row['Gold Players'])
@@ -117,13 +117,10 @@ if __name__ == "__main__":
     print(teamDataWithSecret)
     teamsWithSecretList.append(teamDataWithSecret)
 
-<<<<<<< Updated upstream
+
   print(teamNameToFullTeamDict.keys())
-  with open("./data_files/teams/teams.json", "w") as file1:
-=======
   with open("./data_files/teams/teams1.json", "w") as file1:
->>>>>>> Stashed changes
-    file1.write("teams = '")
+    file1.write("teams_iiitd = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")
   # print(teamsWithSecretList)
