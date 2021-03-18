@@ -14,7 +14,7 @@ function reqListener() {
 
 var getSubs = () => {
 
-  if(window.location.href.indexOf("iiid") < 0) {
+  if(window.location.href.indexOf("iiitd") < 0) {
     contest = "MEGA"
   }else {
     contest = "IIITD"
