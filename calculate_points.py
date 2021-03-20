@@ -6,8 +6,8 @@ players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Ja
            'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant',
            'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'lokesh Rahul', 'Hardik Pandya', 'Moeen Ali',
            'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
-           'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Kuldeep Yadav', 'Mohammed Siraj', 'Wriddhiman Saha',
-           'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', 'Umesh Yadav', "Yuzvendra Chahal"
+           'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Mohammed Siraj', 'Wriddhiman Saha',
+           'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', "Yuzvendra Chahal"
            , 'Sam Curran', 'Bhuvneshwar Kumar', 'Chris Jordan', 'shikhar dhawan', 'shreyas iyer', 'adil rashid', 'dawid malan', 'jos buttler', 'hardik pandya'
            , 'suryakumar yadav', 't natarajan', 'jason roy', 'eoin morgan', 'tom curran', 'ishan kishan', 'liam livingstone', 'rahul chahar', 'rahul tewatia', 'deepak chahar']
 
@@ -31,6 +31,7 @@ def  fetch():
     'x-rapidapi-host': 'dev132-cricket-live-scores-v1.p.rapidapi.com'
   }
   response = requests.request("GET", url, headers=headers, data = payload)
+  print(response.json())
   return response.json()
 
 def calc_batsman_score(data):
@@ -74,6 +75,7 @@ def parse_how_out(how_out):
     score = 12
     player = ""
     if data[0: 2] == 'c:':
+      print(player)
       player = data[3:].split(' ')[0]
       score = 8
     elif data[0:3] == 'c&b':
@@ -168,4 +170,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2+ "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  commit()
+  # commit()
