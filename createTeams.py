@@ -74,8 +74,8 @@ def set_teams_in_db(teams):
   print(response.text)
 
 if __name__ == "__main__":
-  data = pd.read_excel("data_files/MEGA4.xlsx")
-  contestName = 'MEGA'
+  data = pd.read_excel("data_files/IIITD4.xlsx")
+  contestName = 'IIITD'
   dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain', 'Password'])
 
   teamNameToFullTeamDict = {}
@@ -118,14 +118,14 @@ if __name__ == "__main__":
 
 
   # print(teamNameToFullTeamDict.keys())
-  with open("./data_files/teams/teams.json", "w") as file1:
-    file1.write("teams = '")
+  with open("./data_files/teams/teams1.json", "w") as file1:
+    file1.write("teams_iiitd = '")
     writeTeams(teamNameToFullTeamDict, file1)
     file1.write("'")
   print(teamsWithSecretList)
   print(len(teamNameToFullTeamDict.keys()))
   print(teamNameToFullTeamDict.keys())
-  set_teams_in_db(teamsWithSecretList)
+  # set_teams_in_db(teamsWithSecretList)
   
 
   # teamObj = teams(row['Full Name'], )
