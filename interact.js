@@ -347,7 +347,7 @@ function executeLogic(subs) {
 
   function handleSubstitution(team, subDay, subIn, subOut, captain, viceCaptain, score, pointsTable) {
     var multiplier = 1;
-    var snapshot = getSnapshotFromDay(subDay)
+    var snapshot = day1Snapshot
     if (team.includes(subOut)) {
 
       if (subOut === captain) {
@@ -392,7 +392,9 @@ function executeLogic(subs) {
           if (isViceCaptain) multiplier = 1.5;
           if (isSubOut) {
             subbed = true;
-            var snapshot = getSnapshotFromDay(team.subs[j]["subday"]);
+            console.log(team.subs[j])
+            var snapshot = day1Snapshot;
+            console.log(snapshot)
             if (snapshot[players[j][i].toLowerCase()] == null) {
               snapshot[players[j][i].toLowerCase()] = {
                 "score": pointsTable[players[j][i].toLowerCase()]["score"],
@@ -413,7 +415,7 @@ function executeLogic(subs) {
 
         if (subbed) {
           var playerName = team.subs[j]["subIn"].toLowerCase();
-          var snapshot = getSnapshotFromDay(team.subs[j]["subday"]);
+          var snapshot = day1Snapshot;
           if (snapshot[playerName] == null) {
             snapshot[playerName] = {
               "score": pointsTable[playerName]["score"],
