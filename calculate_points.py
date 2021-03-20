@@ -24,7 +24,7 @@ def commit():
   except Exception as e:
     print("Exception")
 def  fetch():
-  url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2731&matchid=49845"
+  url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php?seriesid=2731&matchid=49846"
   payload = {}
   headers = {
     'x-rapidapi-key': 'dd8d46530cmsh63fc0c06dd092f1p1ca8a6jsn143ccf9a171f',
@@ -168,4 +168,4 @@ if __name__ == "__main__":
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2+ "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
-  commit()
+  # commit()
