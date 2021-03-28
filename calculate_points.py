@@ -2,14 +2,13 @@ import requests
 import json
 import subprocess
 
-players = ['Virat Kohli', 'Joe Root', 'Rohit Sharma', 'Ravichandran Ashwin', 'Jasprit Bumrah', 'Cheteshwar Pujara',
-           'Ben Stokes', 'James Anderson', 'Ajinkya Rahane', 'Jofra Archer', 'Jonny Bairstow', 'Rishabh Pant',
-           'Shubman Gill', 'Stuart Broad', 'Jack Leach', 'Ishant Sharma', 'lokesh Rahul', 'Hardik Pandya', 'Moeen Ali',
-           'Chris Woakes', 'Dom Bess', 'Washington Sundar', 'Ben Foakes', 'Dan Lawrence', 'Olly Stone', 'Rory Burns',
-           'Dominic Sibley', 'Axar Patel', 'Mayank Agarwal', 'Mohammed Siraj', 'Wriddhiman Saha',
-           'Shardul Thakur', 'Zak Crawley', 'Ollie Pope', 'Shahbaz Nadeem', 'Mark Wood', "Yuzvendra Chahal"
-           , 'Sam Curran', 'Bhuvneshwar Kumar', 'Chris Jordan', 'shikhar dhawan', 'shreyas iyer', 'adil rashid', 'dawid malan', 'jos buttler', 'hardik pandya'
-           , 'suryakumar yadav', 't natarajan', 'jason roy', 'eoin morgan', 'tom curran', 'ishan kishan', 'liam livingstone', 'rahul chahar', 'rahul tewatia', 'deepak chahar']
+players = ['Virat Kohli', 'Rohit Sharma',
+           'Ben Stokes', 'Jonny Bairstow', 'Rishabh Pant',
+           'Shubman Gill', 'lokesh Rahul', 'Hardik Pandya', 'Moeen Ali',
+           'Chris Woakes', 'Washington Sundar', 'Mohammed Siraj', 
+           'Shardul Thakur', 'Mark Wood', "Yuzvendra Chahal"
+           , 'Sam Curran', 'Bhuvneshwar Kumar', 'Chris Jordan', 'shikhar dhawan', 'shreyas iyer', 'adil rashid', 'dawid malan', 'jos buttler', 'krunal pandya'
+           , 'suryakumar yadav', 't natarajan', 'jason roy', 'tom curran', 'liam livingstone', "jason roy", "kuldeep yadav", "sam billings", "matt parkinson", "reece topley", "prasidh krishna"]
 
 
 def run(*args):
@@ -41,12 +40,10 @@ def calc_batsman_score(data):
   if run:
     run = int(run)
     score = run
-    if run >= 30:
-      bonus += 4
     if run >= 50:
       bonus += 4
     if run >= 100:
-      bonus += 8
+      bonus += 4
   return (score, bonus)
 
 def calc_bowler_score(data):
@@ -55,11 +52,11 @@ def calc_bowler_score(data):
   wickets = data['wickets']
   if wickets:
     wickets = int(wickets)
-    score = wickets * 20
+    score = wickets * 25
     if wickets >= 4:
-      bonus +=8
+      bonus += 4
     if wickets >= 5:
-      bonus +=8
+      bonus += 4
   return (score, bonus)
 
 
@@ -75,7 +72,6 @@ def parse_how_out(how_out):
     score = 12
     player = ""
     if data[0: 2] == 'c:':
-      print(player)
       player = data[3:].split(' ')[0]
       score = 8
     elif data[0:3] == 'c&b':
