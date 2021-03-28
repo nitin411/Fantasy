@@ -74,7 +74,7 @@ def set_teams_in_db(teams):
   print(response.text)
 
 if __name__ == "__main__":
-  data = pd.read_excel("data_files/IIITD4.xlsx")
+  data = pd.read_excel("data_files/MegaContest.xlsx")
   contestName = 'IIITD'
   dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain', 'Password'])
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
   print(teamsWithSecretList)
   print(len(teamNameToFullTeamDict.keys()))
   print(teamNameToFullTeamDict.keys())
-  # set_teams_in_db(teamsWithSecretList)
+  set_teams_in_db(teamsWithSecretList)
   
 
   # teamObj = teams(row['Full Name'], )
