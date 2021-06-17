@@ -2,13 +2,36 @@ import requests
 import json
 import subprocess
 
-players = ['Virat Kohli', 'Rohit Sharma',
-           'Ben Stokes', 'Jonny Bairstow', 'Rishabh Pant',
-           'Shubman Gill', 'lokesh Rahul', 'Hardik Pandya', 'Moeen Ali',
-           'Chris Woakes', 'Washington Sundar', 'Mohammed Siraj', 
-           'Shardul Thakur', 'Mark Wood', "Yuzvendra Chahal"
-           , 'Sam Curran', 'Bhuvneshwar Kumar', 'Chris Jordan', 'shikhar dhawan', 'shreyas iyer', 'adil rashid', 'dawid malan', 'jos buttler', 'krunal pandya'
-           , 'suryakumar yadav', 't natarajan', 'jason roy', 'tom curran', 'liam livingstone', "jason roy", "kuldeep yadav", "sam billings", "matt parkinson", "reece topley", "prasidh krishna"]
+players = ["Ajinkya Rahane",
+"Cheteshwar Pujara",
+"Kane Williamson",
+"Ravichandran Ashwin",
+"Ravindra Jadeja",
+"Rohit Sharma",
+"Ross Taylor",
+"Tim Southee",
+"Trent Boult",
+"Virat Kohli",
+"Henry Nicholls",
+"Ishant Sharma",
+"Jasprit Bumrah",
+"Kyle Jamieson",
+"Matt Henry",
+"Mohammad Shami",
+"Neil Wagner",
+"Rishabh Pant",
+"Shubman Gill",
+"Tom Latham",
+"Ajaz Patel",
+"BJ Watling",
+"Collin de Grandhomme",
+"Devon Conway",
+"Hanuma Vihari",
+"Mohammed Siraj",
+"Tom Blundell",
+"Umesh Yadav",
+"Will Young",
+"Wriddhiman Saha"]
 
 
 def run(*args):
@@ -146,7 +169,7 @@ if __name__ == "__main__":
   team1Score="0/0"
   team2Score="0/0"
   team1="IND"
-  team2="ENG"
+  team2="NZ"
   j=0
   print(scores)
   for i in scores: 
@@ -161,8 +184,8 @@ if __name__ == "__main__":
   
   with open("scoreboard.json", "w") as file:
     file.write("scoreboard = '")
-    file.write("{\"match\": 3,")
-    file.write("\"location\":\"Gujarat\",")
+    file.write("{\"day\": 1,")
+    file.write("\"location\":\"Southampton\",")
     file.write("\"scoreBreakUp\": [{\"batting\": \"" + team1 + "\"," + "\"score\": \"" + team1Score + "\"},")
     file.write("{\"batting\": \"" + team2+ "\"," + "\"score\": \"" + team2Score + "\"}],")
     file.write("\"overs\": \"" + data['fullScorecard']['innings'][0]['over'] + "\"}'")
