@@ -74,7 +74,7 @@ def set_teams_in_db(teams):
   print(response.text)
 
 if __name__ == "__main__":
-  data = pd.read_excel("data_files/MegaContest.xlsx")
+  data = pd.read_excel("data_files/WTCFinal_IIITD.xlsx")
   contestName = 'IIITD'
   dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain', 'Password'])
 

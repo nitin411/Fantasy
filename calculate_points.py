@@ -17,14 +17,14 @@ players = ["Ajinkya Rahane",
 "Jasprit Bumrah",
 "Kyle Jamieson",
 "Matt Henry",
-"Mohammad Shami",
+"Mohammed Shami",
 "Neil Wagner",
 "Rishabh Pant",
 "Shubman Gill",
 "Tom Latham",
 "Ajaz Patel",
 "BJ Watling",
-"Collin de Grandhomme",
+"Colin de Grandhomme",
 "Devon Conway",
 "Hanuma Vihari",
 "Mohammed Siraj",
@@ -157,7 +157,6 @@ if __name__ == "__main__":
   
   parse_how_out(how_out)
 
-  points["k l rahul"] = points["lokesh rahul"]
   points["rishab pant"] = points["rishabh pant"]
 
   points = json.dumps(points)
