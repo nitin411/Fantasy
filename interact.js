@@ -17,7 +17,7 @@ var getSubs = () => {
   if(window.location.href.indexOf("iiitd") < 0) {
     contest = "MEGA"
   }else {
-    contest = "IIITD3"
+    contest = "IIITD4"
   }
   const url = 'https://clash11.herokuapp.com/getallsubs?contestName=' + contest;
 
@@ -96,7 +96,6 @@ function executeLogic(subs) {
       myTeams[i].badSubOut = [null, null, null, null];
 
       for (var j=0; j< subs.length; j++) {
-        console.log(subs[j])
         if (subs[j].teamname.toLowerCase() === teamName.toLowerCase()) {
           for (var k=0; k<players; k++){
             if (myTeams[i].players[k].toLowerCase().includes(subs[j].playername.toLowerCase())) {
@@ -251,9 +250,9 @@ function executeLogic(subs) {
             var outIcon = document.createElement("img");
             outIcon.src = "/Fantasy/assets/banner/Out.svg";
 
-            // textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
+            textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subday"] + " "));
             textLink.appendChild(outIcon);
-            textLink.appendChild(document.createTextNode(" "));
+            textLink.appendChild(document.createTextNode(") "));
           }
             
 
@@ -280,9 +279,9 @@ function executeLogic(subs) {
             text = " - " + (subbed? points + "/":"") + totalPoints + " pts.";
             var textLink = document.createElement("a");
             var boldSpan = document.createElement("b");
-            // textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subDay"] + " "));
+            textLink.appendChild(document.createTextNode("(D" + myTeams[a].subs[b]["subday"] + " "));
             textLink.appendChild(inIcon);
-            textLink.appendChild(document.createTextNode(" "));
+            textLink.appendChild(document.createTextNode(" )"));
             boldSpan.appendChild(document.createTextNode(playerName));
             textLink.appendChild(boldSpan);
             textLink.appendChild(document.createTextNode(text));
@@ -391,21 +390,21 @@ function executeLogic(subs) {
           if (isCaptain) multiplier = 2;
           if (isViceCaptain) multiplier = 1.5;
           if (isSubOut) {
-            subbed = true;
-            console.log(team.subs[j])
-            var snapshot = day1Snapshot;
-            console.log(snapshot)
+            subbed = true
+            var snapshot = getSnapshotFromDay(team.subs[j]["subday"]);
+            if (snapshot == null) {
+              snapshot = {}
+            }
             if (snapshot[players[j][i].toLowerCase()] == null) {
               snapshot[players[j][i].toLowerCase()] = {
-                "score": pointsTable[players[j][i].toLowerCase()]["score"],
-                "bonus": pointsTable[players[j][i].toLowerCase()]["bonus"]
+                "score": 0,
+                "bonus": 0
               }
             }
             team["playerPoints"][j][players[j][i].toLowerCase()] = [snapshot[players[j][i].toLowerCase()]["score"]*multiplier + snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier]
             scores[j] += snapshot[players[j][i].toLowerCase()]["score"]*multiplier
             bonuses[j] += snapshot[players[j][i].toLowerCase()]["bonus"]*multiplier
           } else {
-            console.log(players[j][i])
             team["playerPoints"][j][players[j][i].toLowerCase()] = [pointsTable[players[j][i].toLowerCase()]["score"]*multiplier + pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier]
             scores[j] += pointsTable[players[j][i].toLowerCase()]["score"]*multiplier
             bonuses[j] += pointsTable[players[j][i].toLowerCase()]["bonus"]*multiplier
@@ -415,13 +414,16 @@ function executeLogic(subs) {
 
         if (subbed) {
           var playerName = team.subs[j]["subIn"].toLowerCase();
-          console.log(team.subs)
-          console.log(team)
-          var snapshot = day1Snapshot;
+          var snapshot = getSnapshotFromDay(team.subs[j]["subday"]);
+          
+          if (snapshot == null) {
+            snapshot = {}
+          }
+
           if (snapshot[playerName] == null) {
             snapshot[playerName] = {
-              "score": pointsTable[playerName]["score"],
-              "bonus": pointsTable[playerName]["bonus"]
+              "score": 0,
+              "bonus": 0
             }
           }
           team["playerPoints"][j][playerName] = [pointsTable[playerName]["score"] - snapshot[playerName]["score"]]
@@ -430,8 +432,6 @@ function executeLogic(subs) {
 
       }
     }
-    
-    // console.log(team);
     var totalScore = scores.reduce((a, b) => a + b, 0)
     totalScore += bonuses.reduce((a, b) => a + b, 0)
     return {scores, bonuses, totalScore, subOutScores, subInScores};

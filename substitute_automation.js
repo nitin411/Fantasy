@@ -12,7 +12,7 @@ document.getElementById("authenticate-user").onclick = function() {
     var secretKey = document.getElementById("secretKey").value;
 
     if (contestName === "IIITD") {
-        contestName = "IIITD3"
+        contestName = "IIITD4"
         teams = iiitd_teams
     } else {
         teams = mega_teams
