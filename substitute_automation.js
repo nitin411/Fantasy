@@ -12,6 +12,7 @@ document.getElementById("authenticate-user").onclick = function() {
     var secretKey = document.getElementById("secretKey").value;
 
     if (contestName === "IIITD") {
+        contestName = "IIITD3"
         teams = iiitd_teams
     } else {
         teams = mega_teams
@@ -150,7 +151,7 @@ document.getElementById("authenticate-user").onclick = function() {
             data.append('teamName', teamName);
             data.append('subIn', subIn);
             data.append('subOut', subOut);
-            data.append('subDay', '1');
+            data.append('subDay', '2');
             data.append("contestName", contestName);
             data.append("secret", secretKey);
 

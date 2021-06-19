@@ -17,7 +17,7 @@ var getSubs = () => {
   if(window.location.href.indexOf("iiitd") < 0) {
     contest = "MEGA"
   }else {
-    contest = "IIITD4"
+    contest = "IIITD3"
   }
   const url = 'https://clash11.herokuapp.com/getallsubs?contestName=' + contest;
 
