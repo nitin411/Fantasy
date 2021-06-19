@@ -154,6 +154,7 @@ if __name__ == "__main__":
         points[player]["score"] = score
       print("Bowling after " + str(player) + str(points[player]))
 
+
   
   parse_how_out(how_out)
 

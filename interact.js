@@ -17,7 +17,7 @@ var getSubs = () => {
   if(window.location.href.indexOf("iiitd") < 0) {
     contest = "MEGA"
   }else {
-    contest = "IIITD"
+    contest = "IIITD2"
   }
   const url = 'https://clash11.herokuapp.com/getallsubs?contestName=' + contest;
 
@@ -415,6 +415,8 @@ function executeLogic(subs) {
 
         if (subbed) {
           var playerName = team.subs[j]["subIn"].toLowerCase();
+          console.log(team.subs)
+          console.log(team)
           var snapshot = day1Snapshot;
           if (snapshot[playerName] == null) {
             snapshot[playerName] = {

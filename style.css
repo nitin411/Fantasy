@@ -82,15 +82,15 @@ body{
       background-color: #e8e8e8;
     }
 
-    .table tbody tr:nth-child(2) td:first-child {
+    .table tbody tr:nth-child(1) td:first-child {
       background: linear-gradient(#FFC85F 0%, #F7A829 100%);
     }
   
-    .table tbody tr:nth-child(3) td:first-child{
+    .table tbody tr:nth-child(2) td:first-child{
       background: linear-gradient(#D6D6D6 0%, #9D9D9D 100%);
     }
   
-    .table tbody tr:nth-child(4) td:first-child {
+    .table tbody tr:nth-child(3) td:first-child {
       background: linear-gradient(#E2A857 0%, #C4761C 100%);
     }
 
@@ -99,7 +99,7 @@ body{
     }
 
     .banner {
-      background-image: url(assets/banner/Mask\ Group\ 6\ 2/Mask\ Group\ 7@2x.png);
+      background-image: url(assets/banner/WTC\ desktop@3x_2.png);
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -360,4 +360,8 @@ b {
   .display-hr {
     visibility: hidden;
   }
+}
+
+.btn {
+  margin-bottom: 10px;
 }

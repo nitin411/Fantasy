@@ -75,7 +75,7 @@ def set_teams_in_db(teams):
 
 if __name__ == "__main__":
   data = pd.read_excel("data_files/WTCFinal_IIITD.xlsx")
-  contestName = 'IIITD'
+  contestName = 'IIITD2'
   dataFrame = pd.DataFrame(data, columns= ['Team Name', 'Full Name', 'Gold Players', 'Silver Players', 'Bronze Players', 'Captain', 'Vice Captain', 'Password'])
 
   teamNameToFullTeamDict = {}
