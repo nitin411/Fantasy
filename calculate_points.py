@@ -64,9 +64,9 @@ def calc_batsman_score(data):
     run = int(run)
     score = run
     if run >= 50:
-      bonus += 4
+      bonus += 5
     if run >= 100:
-      bonus += 4
+      bonus += 5
   return (score, bonus)
 
 def calc_bowler_score(data):
@@ -75,11 +75,11 @@ def calc_bowler_score(data):
   wickets = data['wickets']
   if wickets:
     wickets = int(wickets)
-    score = wickets * 25
+    score = wickets * 15
     if wickets >= 4:
-      bonus += 4
+      bonus += 5
     if wickets >= 5:
-      bonus += 4
+      bonus += 5
   return (score, bonus)
 
 
@@ -92,14 +92,14 @@ def get_full_name(nick_name):
 
 def parse_how_out(how_out):
   for data in how_out:
-    score = 12
+    score = 10
     player = ""
     if data[0: 2] == 'c:':
       player = data[3:].split(' ')[0]
-      score = 8
+      score = 5
     elif data[0:3] == 'c&b':
       player = data[5:]
-      score = 8
+      score = 5
     elif data[0:7] == 'run out':
       player = data[9:-1]
     elif data[0: 2] == 'st':
