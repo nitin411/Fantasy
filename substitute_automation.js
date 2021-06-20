@@ -151,7 +151,7 @@ document.getElementById("authenticate-user").onclick = function() {
             data.append('teamName', teamName);
             data.append('subIn', subIn);
             data.append('subOut', subOut);
-            data.append('subDay', '2');
+            data.append('subDay', '3');
             data.append("contestName", contestName);
             data.append("secret", secretKey);
 
