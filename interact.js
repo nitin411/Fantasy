@@ -40,6 +40,7 @@ function executeLogic(subs) {
   var day2Snapshot = JSON.parse(data_day_2);
   var day3Snapshot = JSON.parse(data_day_3);
   var day4Snapshot = JSON.parse(data_day_4);
+  var day5Snapshot = JSON.parse(data_day_5);
 
   var scores = [];
   var teams = [];
@@ -341,6 +342,8 @@ function executeLogic(subs) {
       return day3Snapshot
     } else if (day === 4) {
       return day4Snapshot
+    } else if (day === 5) {
+      return day5Snapshot
     }
   }
 
