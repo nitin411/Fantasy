@@ -189,7 +189,7 @@ var x = setInterval(function() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Display the result in the element with id="demo"
-  document.getElementById("countdown").innerHTML = "Substitutes made now will reflect after Day 5";
+  document.getElementById("countdown").innerHTML = "No more substitutions allowed in the game";
 
   // If the count down is finished, write some text
   if (distance < 0) {
